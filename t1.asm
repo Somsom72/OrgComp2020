@@ -4,7 +4,7 @@
 #Strings para interação com o usuario
 str_erro : .asciiz "Valor digitado invalido\n\n"
 str_menu : .asciiz "Bem-vindo à calculadora\n"
-str_opera: .asciiz "Digite:\n\n1-soma\n2-subtracao\n3-multiplicacao\n4-divisao\n5-potencia\n6-raiz quadrada\n7-Tabuada\n8-IMC\n9-Fatorial\n10-Fibonacci\n11-Encerrar\n\n"
+str_opera: .asciiz "Digite:\n\n1-soma\n2-subtracao\n3-multiplicacao\n4-divisao\n5-potencia\n6-raiz quadrada\n7-tabuada\n8-IMC\n9-fatorial\n10-fibonacci\n11-Encerrar o programa\n\n"
 str_close: .asciiz "\n----Fechando programa----\n"
 str_args: .asciiz "Insira o(s) argumento(s)\n"
 str_resp: .asciiz "Resposta: "
@@ -50,7 +50,7 @@ menu:
 	#OPCAO 5
 	
 	#OPCAO 6
-	beq $t1, 6, raiz
+	beq $t1, 6, raizMain
 	
 	#OPCAO 7
 	#OPCAO 8
@@ -73,7 +73,7 @@ fim:
 	syscall
 
 
-raiz: 
+raizMain: 
 	#Pedindo argumento
 	li $v0, 4
 	la $a0, str_args
@@ -86,10 +86,35 @@ raiz:
 	
 	#Detectar valor inadequado
 	blt $t1, 0, erro
-	j menu
 	
 	#Loop da raiz
+	li $t2, 0 #Inicializando contador
+	li $t4, 1 #Inicializando o registrador que guardara o proximo impar a ser somado
+	li $t5, 0 #Inicializando o registrador que guardara a soma dos impares
+	j raizLoop
 	
+raizLoop:
+	#Retorna ceil(sqrt(n)) para n sem raiz exata, e sqrt(n) para n com raiz exata.
+	#Metodo usado: somando iterativamente os impares ate ultrapassar n, retornando o contador.
+	bge $t5, $t1, raizImprimir #Se a soma dos impares ultrapassar o quadrado da entrada, acabamos!
+	add $t5, $t5, $t4 #Adicionando mais um impar a soma
+	addi $t4, $t4, 2 #Atualizando o proximo impar a ser somado
+	addi $t2, $t2, 1 #Incrementando o contador
+	j raizLoop
+	
+raizImprimir:
+	#Finaliza o loop da raiz, imprimindo o resultado
+	li $v0, 4
+	la $a0, str_resp
+	syscall
+	li $v0, 1
+	move $a0, $t2
+	syscall
+	li $v0, 4
+	la $a0, str_novaLinha
+	syscall
+	j menu
+		
 fatorialMain:
 	#Pedindo argumento
 	li $v0, 4
