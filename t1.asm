@@ -1,9 +1,9 @@
 	.data
 	.align 0
 	
-#Strings para interação com o usuario
+#Strings para interaÃ§Ã£o com o usuario
 str_erro : .asciiz "Valor digitado invalido\n\n"
-str_menu : .asciiz "Bem-vindo à calculadora\n"
+str_menu : .asciiz "Bem-vindo Ã  calculadora\n"
 str_opera: .asciiz "\n\nDigite:\n1-soma\n2-subtracao\n3-multiplicacao\n4-divisao\n5-potencia\n6-raiz quadrada\n7-tabuada - Numero de 1 a 10\n8-IMC - Altura Peso\n9-fatorial\n10-fibonacci\n11-Encerrar o programa\n\n"
 str_close: .asciiz "\n----Fechando programa----\n"
 str_args: .asciiz "Insira o(s) argumento(s)\n"
@@ -65,6 +65,7 @@ menu:
 	beq $t1, 9, fatorialMain
 	
 	#OPCAO 10
+	beq $t1, 10, fibonacci
 	
 	#OPCAO 11
 	beq $t1, 11, fim
@@ -136,7 +137,7 @@ tabuada:
 	addi $t1, $0, 11
 	bge $v0, $t1, erro
 	
-	#Comparaçao para validade do numero digitado (menor que 0)
+	#ComparaÃ§ao para validade do numero digitado (menor que 0)
 	addi $t1, $0, 0
 	ble $v0, $t1, erro
 	
@@ -146,7 +147,7 @@ tabuada:
 	
 tabuada_mul:
 
-	#Branch de saída da tabuada (quando ja chegou na multiplicacao por 10)
+	#Branch de saÃ­da da tabuada (quando ja chegou na multiplicacao por 10)
 	bge $t1, $t5, menu
 
 	#Multiplica o valor lido por 0, 1, 2, ... (que esta em $t1)	
@@ -267,5 +268,63 @@ fatorialLoop:
 	addi $t2, $t2, -1
 	mul $t1, $t1, $t2
 	bgt $t2, 1, fatorialLoop
+	
+	jr $ra
+fibonacci:
+	#Pedindo argumento
+	li $v0, 4
+	la $a0, str_args
+	syscall 
+	
+	#Lendo argumento
+	li $v0, 5
+	syscall 
+	move $t1, $v0
+	
+	#Detectar valor inadequado
+	ble  $t1, 0, erro
+	
+	move $t2, $zero
+	li $t3, 1
+	add $t4, $t2, $t3 #guarda a soma dos elementos anteriores
+	
+	# imprime reposta
+	li $v0, 4
+	la $a0, str_resp
+	syscall
+	
+	#imprime o primeiro termo
+	li $v0, 1
+	li $a0, 1
+	syscall
+	
+	li $v0, 4
+	la $a0, str_espaco
+	syscall
+	
+	#imprime o restante
+	jal fibonacciLoop
+	
+	li $v0, 4
+	la $a0, str_novaLinha
+	syscall
+	
+	j menu
+fibonacciLoop:
+	#imprime a sequencia
+	li $v0, 1
+	move $a0, $t4
+	syscall
+	
+	li $v0, 4
+	la $a0, str_espaco
+	syscall
+	
+	move $t2, $t3 #vai guardar o anterior
+	move $t3, $t4 #vai guardar o proximo
+	
+	add $t4, $t2, $t3 #soma = fib1 + fib2
+	
+	ble $t4, $t1, fibonacciLoop
 	
 	jr $ra
