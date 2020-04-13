@@ -834,8 +834,6 @@ fibonacciLoop:
 	ble $t4, $t1, fibonacciLoop
 	
 	jr $ra
-j menu
-
 fim:
 
 	#Finaliza o programa com mensagem
