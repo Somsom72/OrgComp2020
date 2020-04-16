@@ -47,6 +47,8 @@ str_novaLinha: .asciiz "\n"
 str_espaco: .asciiz " "
 
 	.align 3
+
+#Variável estática para comparar valores double menores que 0
 d0: .double 0.0
 
 	.text
@@ -630,10 +632,15 @@ IMC:
 	li $v0, 7
 	syscall
 	
+	#Verificação do sinal do valor digitado
+	#Como não há um load immediate para valores de ponto flutuante
+	#este método usa a variável estática double do .data
+	#e compara com o valor digitado
+	#Caso seja negativo, vai para mensagem de erro e menu, caso não, procede normalmente
 	mov.d $f2, $f0 #altura em f2
-	l.d $f8, d0
-	c.lt.d $f2, $f8
-	bc1t erro
+	l.d $f8, d0 #Load address para double
+	c.lt.d $f2, $f8 #Compara os valores e 'seta' uma flag caso seja true a comparacao ($f2 < $f8)
+	bc1t erro #Se a flag está true, vai para erro, senão, continua normalmente
 	nop
 	
 	
@@ -648,10 +655,17 @@ IMC:
 	syscall
 	
 	mov.d $f4, $f0 #peso em f4
-	l.d $f8, d0
-	c.lt.d $f4, $f8
-	bc1t erro
+	
+	#Verificação do sinal do valor digitado
+	#Como não há um load immediate para valores de ponto flutuante
+	#este método usa a variável estática double do .data
+	#e compara com o valor digitado
+	#Caso seja negativo, vai para mensagem de erro e menu, caso não, procede normalmente
+	l.d $f8, d0 #load immediate para ponto flutuante
+	c.lt.d $f4, $f8 #Comparação que 'seta' uma flag se for true o resultado
+	bc1t erro #Se for true a flag, vai para erro, senão procede normalmente
 	nop
+	
 	#IMC <= peso/(altura^2)
 
 	mul.d $f6, $f2, $f2 #altura ao quadrado em f6
