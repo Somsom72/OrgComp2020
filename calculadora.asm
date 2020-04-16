@@ -4,19 +4,19 @@
 
 	
 
-#Strings para intera√ß√£o com o usuario
+#Strings para interaÁ„o com o usuario
 
 str_erro : .asciiz "Valor digitado invalido\n"
 
-str_menu : .asciiz "Bem-vindo √† calculadora"
+str_menu : .asciiz "Bem-vindo ‡ calculadora"
 
-str_opera: .asciiz "\nDigite:\n1-Soma(A+B)\n2-Subtra√ß√£o(A-B)\n3-Multiplica√ß√£o(A*B)(com ambos de at√© 16 bits)\n4-Divisao(A/B)(com ambos de at√© 16 bits)\n5-Pot√™ncia(A^B)\n6-Raiz quadrada(sqrt(A))\n7-Tabuada (de um n√∫mero <429496728)\n8-IMC\n9-Fatorial (A!, com A<13)\n10-Sequencia de Fibonacci at√© A \n11-Encerrar o programa\n"
+str_opera: .asciiz "\nDigite:\n1-Soma(A+B)\n2-SubtraÁ„o(A-B)\n3-MultiplicaÁ„o(A*B)(com ambos de atÈ 16 bits)\n4-Divisao(A/B)(com ambos de atÈ 16 bits)\n5-PotÍncia(A^B)\n6-Raiz quadrada(sqrt(A))\n7-Tabuada (de um n˙mero <429496728)\n8-IMC\n9-Fatorial (A!, com A<13)\n10-Sequencia de Fibonacci atÈ A \n11-Encerrar o programa\n"
 
 str_close: .asciiz "\n----Fechando programa----\n"
 
 str_argsA: .asciiz "Insira o argumento A\n"
 
-str_argsB: .asciiz "Insira tamb√©m o argumento B\n"
+str_argsB: .asciiz "Insira tambÈm o argumento B\n"
 
 str_Altura: .asciiz "Insira a altura:\n"
 
@@ -46,7 +46,8 @@ str_novaLinha: .asciiz "\n"
 
 str_espaco: .asciiz " "
 
-
+	.align 3
+d0: .double 0.0
 
 	.text
 
@@ -56,7 +57,7 @@ str_espaco: .asciiz " "
 
 main:
 
-	#Impress√£o da mensagem de boas vindas e Chamada do menu
+	#Impress„o da mensagem de boas vindas e Chamada do menu
 
 	li $v0, 4
 
@@ -78,7 +79,7 @@ erro:
 
 	syscall
 
-	#j menu # para caso esta "fun√ß√£o" esteja em outra regi√£o do c√≥digo
+	#j menu # para caso esta "funÁ„o" esteja em outra regi„o do cÛdigo
 
 menu:
 
@@ -97,17 +98,17 @@ menu:
 
 	syscall
 	
-	#Passando o valor lido como par√¢metro (via $v0) para escolher uma das fun√ß√µes da calculadora
+	#Passando o valor lido como par‚metro (via $v0) para escolher uma das funÁıes da calculadora
 
 	#OPCAO 1 - Soma(A+B)
 	
 	beq $v0, 1, soma
 
-	#OPCAO 2 - Subtra√ß√£o(A-B)
+	#OPCAO 2 - SubtraÁ„o(A-B)
 	
 	beq $v0, 2, subtracao
 
-	#OPCAO 3 - Multiplica√ß√£o(A*B)
+	#OPCAO 3 - MultiplicaÁ„o(A*B)
 	
 	beq $v0, 3, multiplicacao
 
@@ -115,7 +116,7 @@ menu:
 	
 	beq $v0, 4, divisao
 
-	#OPCAO 5 - Pot√™ncia(A^B)
+	#OPCAO 5 - PotÍncia(A^B)
 	
 	beq $v0, 5, potencia
 
@@ -123,7 +124,7 @@ menu:
 
 	beq $v0, 6, raizMain
 
-	#OPCAO 7 - Tabuada (de um n√∫mero de <400M)
+	#OPCAO 7 - Tabuada (de um n˙mero de <400M)
 
 	beq $v0, 7, tabuada
 
@@ -135,7 +136,7 @@ menu:
 
 	beq $v0, 9, fatorialMain
 
-	#OPCAO 10 - Sequencia de Fibonacci at√© A (com A<48)
+	#OPCAO 10 - Sequencia de Fibonacci atÈ A (com A<48)
 	
 	beq $v0, 10, fibonacciMain
 
@@ -195,7 +196,7 @@ soma:
 	la $a0, str_novaLinha
 	syscall #printf("\n");
 	
-	#move $v0,$t3  #Salva o 'retorno da fun√ß√£o - n√£o usado 
+	#move $v0,$t3  #Salva o 'retorno da funÁ„o - n„o usado 
 	#retorna ao menu
 	j menu
 
@@ -246,7 +247,7 @@ subtracao:
 	la $a0, str_novaLinha
 	syscall #printf("\n");
 	
-	#move $v0,$t3  #Salva o 'retorno da fun√ß√£o - n√£o usado 
+	#move $v0,$t3  #Salva o 'retorno da funÁ„o - n„o usado 
 	#retorna ao menu
 	j menu
 
@@ -309,7 +310,7 @@ multiplicacao:
 	la $a0, str_novaLinha
 	syscall #printf("\n");
 	
-	#move $v0,$t3  #Salva o 'retorno da fun√ß√£o - n√£o usado 
+	#move $v0,$t3  #Salva o 'retorno da funÁ„o - n„o usado 
 	#retorna ao menu
 	j menu
 
@@ -372,7 +373,7 @@ divisao:
 	la $a0, str_novaLinha
 	syscall #printf("\n");
 	
-	#move $v0,$t3  #Salva o 'retorno da fun√ß√£o - n√£o usado 
+	#move $v0,$t3  #Salva o 'retorno da funÁ„o - n„o usado 
 	#retorna ao menu
 	j menu
 
@@ -396,7 +397,7 @@ potencia:
 	syscall 
 	move $t2, $v0 #armazena em t2 o valor de B
 	
-	bltz $t2, erro #testa se b √© uma potencia positiva
+	bltz $t2, erro #testa se b È uma potencia positiva
 	
 	move $a0,$t1
 	move $a1,$t2
@@ -430,13 +431,13 @@ potencia:
 	la $a0, str_novaLinha
 	syscall #printf("\n");
 	
-	#move $v0,$t3  #Salva o 'retorno da fun√ß√£o - n√£o usado 
+	#move $v0,$t3  #Salva o 'retorno da funÁ„o - n„o usado 
 	#retorna ao menu
 	j menu
 	
 calcpot:
 
-	beqz $a1,potde0 #teste se a conta √© do tipo A^0 (=1)
+	beqz $a1,potde0 #teste se a conta È do tipo A^0 (=1)
 	#prepara t0 com 1 e v0 com o valor de A (=A^1)
 	li $t0,1 
 	move $v0,$a0
@@ -444,7 +445,7 @@ calcpot:
 looppot:
 
 	beq $a1,$t0,fimpot #caso base: A^1 = A
-	mul $v0,$v0,$t1 #Se n√£o, A=A*Ai 
+	mul $v0,$v0,$t1 #Se n„o, A=A*Ai 
 	addi $a1,$a1,-1
 	j looppot
 	
@@ -560,9 +561,9 @@ tabuada:
 	bge $v0, $t1, erro
 	
 
-	#Compara√ßao para validade do numero digitado (menor que 0)
+	#ComparaÁao para validade do numero digitado (menor que 0)
 
-	addi $t1, $0, 0
+	addi $t1, $0, -1
 
 	ble $v0, $t1, erro
 
@@ -575,7 +576,7 @@ tabuada:
 
 tabuada_mul:
 
-	#Branch de sa√≠da da tabuada (quando ja chegou na multiplicacao por 10)
+	#Branch de saÌda da tabuada (quando ja chegou na multiplicacao por 10)
 
 	beq $t1, $t5, menu
 
@@ -630,7 +631,12 @@ IMC:
 	syscall
 	
 	mov.d $f2, $f0 #altura em f2
-
+	l.d $f8, d0
+	c.lt.d $f2, $f8
+	bc1t erro
+	nop
+	
+	
 	#Chamada do sistema para leitura de double - Peso
 
 	li $v0, 4
@@ -642,7 +648,10 @@ IMC:
 	syscall
 	
 	mov.d $f4, $f0 #peso em f4
-
+	l.d $f8, d0
+	c.lt.d $f4, $f8
+	bc1t erro
+	nop
 	#IMC <= peso/(altura^2)
 
 	mul.d $f6, $f2, $f2 #altura ao quadrado em f6
