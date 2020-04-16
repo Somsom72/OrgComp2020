@@ -11,12 +11,22 @@ DIVISAO:
 POTENCIA:
 
 RAIZ:
+- in: "1"; out: "1"; em caso de entrada positiva inteira c/ raiz perfeita, retorna a raiz.
+- in: "0"; out: "0"; demonstrando que o zero se encaixa no caso anterior.
+- in: "-1"; out: (volta ao menu); retorna erro pois nao existe raiz de negativos.
+- in: "1.4"; out: (encerra programa); funcao implementada para processar valores inteiros.
+- in: "63"; out: "8"; em caso de entrada positiva inteira s/ raiz perfeita, retorna o teto inteiro da raiz para evitar float.
 
 TABUADA:
 
 IMC:
 
 FATORIAL:
+- in: "1"; out: "1"; em caso de entrada positiva inteira, retorna o fatorial.
+- in: "0"; out: "0"; demonstrando que o zero se encaixa no caso anterior.
+- in: "5"; out: "120"; demonstrando com numeros com fatoriais "nao triviais".
+- in: "-1"; out: (volta ao menu); retorna erro pois nao existe fatorial de negativos.
+- in: "1.4"; out: (encerra programa); funcao implementada para processar valores inteiros.
 
 FIBONACCI:
 

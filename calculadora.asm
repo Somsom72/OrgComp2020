@@ -708,6 +708,8 @@ fatorialMain:
 	#Loop do fatorial
 
 	move $t2, $t1 #usando reg. $t2 como contador
+	
+	move $t3, $t1 #guardando valor input
 
 	jal fatorialLoop
 
@@ -716,7 +718,7 @@ fatorialMain:
 	#Imprimindo resultado
 	
 	li $v0, 1
-	move $a0,$t1
+	move $a0,$t3
 	syscall#"A"
 
 	li $v0, 4
@@ -743,7 +745,7 @@ fatorialZero:
 	# imprime 1
 
 	li $v0, 1
-	move $v0,$t1
+	move $a0, $t1
 	syscall#"A"
 
 	li $v0, 4
