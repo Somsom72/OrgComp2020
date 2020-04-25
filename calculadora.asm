@@ -1,26 +1,28 @@
 .data
 
-	.align 0
-
+	.align 0 #os trechos de dados tem damanho 2^0 que é igual a 1
 	
-
 #Strings para interação com o usuario
 
 str_erro : .asciiz "Valor digitado invalido\n"
 
 str_menu : .asciiz "Bem-vindo à calculadora"
 
-str_opera: .asciiz "\nDigite:\n1-Soma(A+B)\n2-Subtração(A-B)\n3-Multiplicação(A*B)(com ambos de até 16 bits)\n4-Divisao(A/B)(com ambos de até 16 bits)\n5-Potência(A^B)\n6-Raiz quadrada(sqrt(A))\n7-Tabuada (de um número <429496728)\n8-IMC\n9-Fatorial (A!, com A<13)\n10-Sequencia de Fibonacci até A \n11-Encerrar o programa\n"
+str_opera: .asciiz "\nDigite:\n1-Soma(A+B)\n2-Subtração(A-B)\n3-Multiplicação(A*B)(com ambos de até 16 bits)(<65536)\n4-Divisao(A/B)(com ambos de até 16 bits)(65536)\n5-Potência(A^B)\n6-Raiz quadrada(sqrt(A))\n7-Tabuada (de um número <429496728)\n8-IMC\n9-Fatorial (A!, com A<13)\n10-Sequencia de Fibonacci até A \n11-Encerrar o programa\n"
 
 str_close: .asciiz "\n----Fechando programa----\n"
 
-str_argsA: .asciiz "Insira o argumento A\n"
+str_argsA: .asciiz "Insira o argumento inteiro A\n"
 
-str_argsB: .asciiz "Insira também o argumento B\n"
+str_argsB: .asciiz "Insira também o argumento inteiro B\n"
 
 str_Altura: .asciiz "Insira a altura:\n"
 
 str_Peso: .asciiz "Insira o peso:\n"
+
+str_Fibo1: .asciiz "Fibo("
+
+str_Fibo2: .asciiz ") = "
 
 str_contaplus: .asciiz " + "
 
@@ -282,8 +284,8 @@ multiplicacao:
 	#testa se o numero tem 16 bits
 	li $t8,65536
 	li $t9,-65536
-	bgt $t1,$t8,erro
-	blt $t1,$t9,erro
+	bgt $t2,$t8,erro
+	blt $t2,$t9,erro
 	
 	mul $t3,$t1,$t2 #faz a multiplicacao e armazena em t3
 	
@@ -345,8 +347,8 @@ divisao:
 	#testa se o numero tem 16 bits
 	li $t8,65536
 	li $t9,-65536
-	bgt $t1,$t8,erro
-	blt $t1,$t9,erro
+	bgt $t2,$t8,erro
+	blt $t2,$t9,erro
 	
 	div $t3,$t1,$t2 #faz a multiplicacao e armazena em t3
 	
@@ -565,12 +567,12 @@ tabuada:
 
 	#Comparaçao para validade do numero digitado (menor que 0)
 
-	addi $t1, $0, -1
+	addi $t1, $0, 0
 
-	ble $v0, $t1, erro
+	blt $v0, $t1, erro
 
 	
-	#Copia valor digitado para registrador temporario
+	#Copia valor digitado para registrador temporario $t5
 
 	move $t4, $v0
 
@@ -802,6 +804,9 @@ fatorialLoop:
 	jr $ra
 	
 fibonacciMain:
+	#inicia o contador em $t5 com 0 
+	li $t5, 0
+
 	#Pedindo argumento
 	li $v0, 4
 	la $a0, str_argsA
@@ -825,9 +830,24 @@ fibonacciMain:
 	syscall
 	
 	#imprime o primeiro termo
+	li $v0, 4
+	la $a0, str_Fibo1
+	syscall#"Fibo("
+	
 	li $v0, 1
-	li $a0, 1
-	syscall
+	move $a0, $t5
+	syscall # "contador"
+	
+	#contador++
+	addi $t5,$t5,1
+	
+	li $v0, 4
+	la $a0, str_Fibo2
+	syscall#") = "
+	
+	li $v0, 1
+	move $a0, $t4
+	syscall # %d
 	
 	li $v0, 4
 	la $a0, str_espaco
@@ -835,17 +855,30 @@ fibonacciMain:
 	
 	#imprime o restante
 	jal fibonacciLoop
-	
-	li $v0, 4
-	la $a0, str_novaLinha
-	syscall
-	
-	j menu
+		
+	j menu #retorna ao menu
 fibonacciLoop:
 	#imprime a sequencia
+	
+	li $v0, 4
+	la $a0, str_Fibo1
+	syscall#"Fibo("
+	
+	li $v0, 1
+	move $a0, $t5
+	syscall # "contador"
+	
+	#contador++
+	addi $t5,$t5,1
+	
+	li $v0, 4
+	la $a0, str_Fibo2
+	syscall#") = "
+	
+	
 	li $v0, 1
 	move $a0, $t4
-	syscall
+	syscall # %d
 	
 	li $v0, 4
 	la $a0, str_espaco
