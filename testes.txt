@@ -52,6 +52,7 @@ RAIZ:
 - in: "50"; out: "sqrt(50) = 8"; mostrando que não é um arredondamento
 - in: "-1"; out: (Volta ao menu com mensagem de erro); retorna erro pois nao existe raiz de negativos.
 - in: "3.14"; out: (encerra programa); funcao implementada para processar valores inteiros.
+- in: "2147000000"; out: "sqrt(2147000000) = 46336"; funcionamento em caso proximo de limite (maxInt de 4 bytes)
 
 
 TABUADA:
@@ -73,6 +74,7 @@ FATORIAL:
 - in: "5"; out: "120"; demonstrando com numeros com fatoriais "nao triviais".
 - in: "-1"; out: (Volta ao menu com mensagem de erro); retorna erro pois nao existe fatorial de negativos.
 - in: "3.14"; out: (encerra programa); funcao implementada para processar valores inteiros.
+- in: "13"; out: "1932053504"; caso limite para valor maximo de int - entradas a partir disso retornam valores sem sentido.
 
 FIBONACCI:
 - in: "1"; out: "1 1"; retorna os dois primeiros termos da sequência.
@@ -80,3 +82,5 @@ FIBONACCI:
 - in: "10000"; out: "1 1 2 3 5 8 13 21 34 55 89 144 233 377 610 987 1597 2584 4181 6765"; demonstrando uma sequencia "nao trivial".
 - in: "143"; out: "1 1 2 3 5 8 13 21 34 55 89"; demonstrando que não chega ao 144, por exemplo, se não for maior ou igual a ele.
 - in: "3.14"; out: (encerra programa); funcao implementada para processar valores inteiros.
+
+*OBS: Menu funciona como esperado, imprimindo "Valor digitado invalido" caso valor inteiro nao esperado, e encerrando caso float.
