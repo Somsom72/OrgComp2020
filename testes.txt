@@ -88,5 +88,3 @@ FIBONACCI:
 - in: "10000"; out: "1 1 2 3 5 8 13 21 34 55 89 144 233 377 610 987 1597 2584 4181 6765"; demonstrando uma sequencia "nao trivial".
 - in: "143"; out: "1 1 2 3 5 8 13 21 34 55 89"; demonstrando que não chega ao 144, por exemplo, se não for maior ou igual a ele.
 - in: "3.14"; out: (encerra programa); funcao implementada para processar valores inteiros.
-
-*OBS: Menu funciona como esperado, imprimindo "Valor digitado invalido" caso valor inteiro nao esperado, e encerrando caso float.
