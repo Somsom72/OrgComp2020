@@ -67,6 +67,7 @@ IMC:
 - in: "10", "10"; out "IMC = 0.1"
 - in: "-5", "-5"; out: (Volta ao menu com mensagem de erro). É feita verificação da validade dos valores. Quando negativos, volta ao menu
 com mensagem de erro
+- in: "1", "1*10^154"; out: "1*10^308" (Maior valor possível para um double)
 
 FATORIAL:
 - in: "1"; out: "1"; em caso de entrada positiva inteira, retorna o fatorial.
