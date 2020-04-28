@@ -1,5 +1,10 @@
 ALGUNS CASOS TESTADOS PARA CADA FUNCAO DA CALCULADORA:
 
+MENU:
+
+- in: "0"; out: ERRO, valor digitado fora do escopo
+- in: "12"; out: ERRO, valor digitado fora do escopo
+
 SOMA:
 
 - in: "10", "5"; out: "10 + 5 = 15"; em caso de entrada de nois números inteiros, retorna a soma deles.
