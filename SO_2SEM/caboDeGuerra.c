@@ -4,10 +4,22 @@
  */
 
 #include <stdio.h>
+#include <time.h>
 #include <pthread.h>
 #include "Jogadores.h"
 #include "EntradaSaida.h"
 #include "Semaforo.h"
+
+/**
+ * \brief Menu de abertura do jogo com as opções de jogar 's' e sair 'k'
+ */
+void Menu(){
+	printf("\n\n=========== Bem-vinde ao Cabo de Guerra ===========\n");
+	printf("\nSelecione uma das opções abaixo:");
+    printf("\n\nJogar: 's'\nSair: 'k'\n\n");
+	
+	return;
+}
 
 /**
  * \brief Contém a lógica do jogo.
@@ -26,14 +38,27 @@ int jogo(void)
  */
 int main(void)
 {
-    /* Menu inicial */
+
     char opcao;
     while(1)
     {
-        printf("\n\nJogar: 's'\nSair: 'k'\n\n");
+		Menu();
         scanf("%c", &opcao);
-        if(opcao == 's') {jogo();}
-        else if(opcao == 'k') {break;}
+		getchar();
+        if(opcao == 's')
+		{
+			clock_t inicio, fim; /*!< Variáveis auxiliares para o cálculo da duração do jogo */
+			inicio = clock();
+			jogo();
+			fim = clock();
+
+			printf("O jogo demorou %.1lf segundos!!\n", (double)fim-inicio);
+		}
+        else if(opcao == 'k')
+		{
+			printf("\n\nVolte sempre!! Tenha um bom dia!!\n\n");
+			break;
+		}
         else {printf("Opção inválida, tente novamente.");}
     }
 
