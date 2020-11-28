@@ -9,7 +9,7 @@ int atualizaPlacar1(float *placar, int *j, float fator_inercia)
     *placar -= (float)*j; *j = 0;
 
     /* inércia */
-    *placar -= (*placar) * fator_inercia;
+    *placar += (*placar) * fator_inercia;
 
     return 0;
 }
@@ -22,7 +22,7 @@ int atualizaPlacar2(float *placar, int *j, float fator_inercia)
     *placar += (float)*j; *j = 0;
 
     /* inércia */
-    *placar -= (*placar) * fator_inercia;
+    *placar += (*placar) * fator_inercia;
 
     return 0;
 }
