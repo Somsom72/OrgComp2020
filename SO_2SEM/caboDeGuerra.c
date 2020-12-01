@@ -15,123 +15,86 @@
 
 
 /** 
- * \brief Struct de entrada da thread "entrada". 
+ * \brief Struct de entrada das threads. 
  */
 typedef struct {
 	int *ptr_j1;
 	int *ptr_j2;
+	float *ptr_placar;
 	int *ptr_quemVenceu;
-} EntradaEntrada;
+} Infos;
 
 /** 
  * \brief Thread responsável por incrementar jogador1/2 dependendo das entradas dos usuários. 
  */
-void *thread_entrada(void *void_ptr_EntradaEntrada)
+void *thread_entrada(void *void_ptr_Infos)
 {
-	EntradaEntrada *ptr_EntradaEntrada = (EntradaEntrada *)void_ptr_EntradaEntrada;
+	Infos *ptr_Infos = (Infos *)void_ptr_Infos;
 
 	system ("/bin/stty raw");
 
 	/* Enquanto não há vencedor, capta entradas relevantes para atualizar os buffers do jogador1 e jogador2 */
-	while(*(ptr_EntradaEntrada -> ptr_quemVenceu) == 0)
+	while(*(ptr_Infos -> ptr_quemVenceu) == 0)
 	{
-		captaEntrada(ptr_EntradaEntrada -> ptr_j1, ptr_EntradaEntrada -> ptr_j2);
+		captaEntrada(ptr_Infos -> ptr_j1, ptr_Infos -> ptr_j2);
 	}
 
 	system ("/bin/stty cooked");
 }
 
-
-/** 
- * \brief Struct de entrada da thread "saida". 
- */
-typedef struct {
-	float *ptr_placar;
-	int *ptr_quemVenceu;
-} EntradaSaida;
-
 /** 
  * \brief Thread responsável por imprimir os gráficos de saída, dependendo do valor do placar. 
  */
-void *thread_saida(void *void_ptr_EntradaSaida)
+void *thread_saida(void *void_ptr_Infos)
 {
-	EntradaSaida *ptr_EntradaSaida = (EntradaSaida *)void_ptr_EntradaSaida;
+	Infos *ptr_Infos = (Infos *)void_ptr_Infos;
 
 	/* Enquanto não há vencedor, imprime a animação de saída utilizando o valor atual do placar */
-	while(*(ptr_EntradaSaida -> ptr_quemVenceu) == 0)
+	while(*(ptr_Infos -> ptr_quemVenceu) == 0)
 	{
-		imprimeSaida(ptr_EntradaSaida -> ptr_placar);
+		imprimeSaida(ptr_Infos -> ptr_placar);
 	}
 }
-
-
-/** 
- * \brief Struct de entrada da thread "confereVencedor". 
- */
-typedef struct {
-	float *ptr_placar;
-	int *ptr_quemVenceu;
-} EntradaConfereVencedor;
 
 /** 
  * \brief Thread responsável por manter a variável "quemVenceu" atualizada. 
  */
-void *thread_confereVencedor(void *void_ptr_EntradaConfereVencedor)
+void *thread_confereVencedor(void *void_ptr_Infos)
 {
-	EntradaConfereVencedor *ptr_EntradaConfereVencedor = (EntradaConfereVencedor *)void_ptr_EntradaConfereVencedor;
+	Infos *ptr_Infos = (Infos *)void_ptr_Infos;
 
 	/* Se há um vencedor, atualizar o "quemVenceu", assim notificando as demais threads que o jogo encerrou */
-	while(*(ptr_EntradaConfereVencedor -> ptr_quemVenceu) == 0)
+	while(*(ptr_Infos -> ptr_quemVenceu) == 0)
 	{
-		*(ptr_EntradaConfereVencedor -> ptr_quemVenceu) = determinaVencedor(*(ptr_EntradaConfereVencedor -> ptr_placar));
+		*(ptr_Infos -> ptr_quemVenceu) = determinaVencedor(*(ptr_Infos -> ptr_placar));
 	}
 }
-
-
-/** 
- * \brief Struct de entrada da thread "jogador1". 
- */
-typedef struct {
-	int *ptr_j1;
-	float *ptr_placar;
-	int *ptr_quemVenceu;
-} EntradaJogador1;
 
 /** 
  * \brief Thread responsáveis por atualizar o placar (região crítica deste), dada uma apertada do jogador1.  
  */
-void *thread_jogador1(void *void_ptr_EntradaJogador1)
+void *thread_jogador1(void *void_ptr_Infos)
 {
-	EntradaJogador1 *ptr_EntradaJogador1 = (EntradaJogador1 *)void_ptr_EntradaJogador1;
+	Infos *ptr_Infos = (Infos *)void_ptr_Infos;
 
 	/* Enquanto não há vencedor, atualiza o placar de acordo com o buffer do jogador1 */
-	while(*(ptr_EntradaJogador1 -> ptr_quemVenceu) == 0)
+	while(*(ptr_Infos -> ptr_quemVenceu) == 0)
 	{
-		atualizaPlacar1(ptr_EntradaJogador1 -> ptr_placar, ptr_EntradaJogador1 -> ptr_j1, FATOR_INERCIA);
+		atualizaPlacar1(ptr_Infos -> ptr_placar, ptr_Infos -> ptr_j1, FATOR_INERCIA);
 	}
 }
-
-
-/** 
- * \brief Struct de entrada da thread "jogador2". 
- */
-typedef struct {
-	int *ptr_j2;
-	float *ptr_placar;
-	int *ptr_quemVenceu;
-} EntradaJogador2;
 
 /** 
  * \brief Thread responsáveis por atualizar o placar (região crítica deste), dada uma apertada do jogador2.  
  */
-void *thread_jogador2(void *void_ptr_EntradaJogador2)
+void *thread_jogador2(void *void_ptr_Infos)
 {
-	EntradaJogador2 *ptr_EntradaJogador2 = (EntradaJogador2 *)void_ptr_EntradaJogador2;
+	Infos *ptr_Infos = (Infos *)void_ptr_Infos;
 
 	/* Enquanto não há vencedor, atualiza o placar de acordo com o buffer do jogador2 */
-	while(*(ptr_EntradaJogador2 -> ptr_quemVenceu) == 0)
+	while(*(ptr_Infos -> ptr_quemVenceu) == 0)
 	{
-		atualizaPlacar2(ptr_EntradaJogador2 -> ptr_placar, ptr_EntradaJogador2 -> ptr_j2, FATOR_INERCIA);
+		atualizaPlacar2(ptr_Infos -> ptr_placar, ptr_Infos -> ptr_j2, FATOR_INERCIA);
 	}
 }
 
@@ -166,30 +129,16 @@ int jogo(void)
 	pthread_t n_thread_confereVencedor;
 	pthread_t n_thread_jogador1, n_thread_jogador2;
 
-	/* Inicializa threads (e suas structs de entrada) */
-
-	EntradaEntrada ee;
-	ee.ptr_j1 = &jogador1;
-	ee.ptr_j2 = &jogador2;
-	ee.ptr_quemVenceu = &quemVenceu;
-	if(pthread_create(&n_thread_entrada, NULL, thread_entrada, &ee)) {exit(1);}
-
-	EntradaSaida es;
-	es.ptr_placar = &placar;
-	es.ptr_quemVenceu = &quemVenceu;
-	if(pthread_create(&n_thread_saida, NULL, thread_saida, &es)) {exit(1);}
-
-	EntradaJogador1 ej1;
-	ej1.ptr_j1 = &jogador1;
-	ej1.ptr_placar = &placar;
-	ej1.ptr_quemVenceu = &quemVenceu;
-	if(pthread_create(&n_thread_jogador1, NULL, thread_jogador1, &ej1)) {exit(1);}
-
-	EntradaJogador2 ej2;
-	ej2.ptr_j2 = &jogador2;
-	ej2.ptr_placar = &placar;
-	ej2.ptr_quemVenceu = &quemVenceu;
-	if(pthread_create(&n_thread_jogador2, NULL, thread_jogador2, &ej2)) {exit(1);}
+	/* Inicializa struct de entrada e as threads. */
+	Infos in;
+	in.ptr_j1 = &jogador1;
+	in.ptr_j2 = &jogador2;
+	in.ptr_placar = &placar;
+	in.ptr_quemVenceu = &quemVenceu;
+	if(pthread_create(&n_thread_entrada, NULL, thread_entrada, &in)) {exit(1);}
+	if(pthread_create(&n_thread_saida, NULL, thread_saida, &in)) {exit(1);}
+	if(pthread_create(&n_thread_jogador1, NULL, thread_jogador1, &in)) {exit(1);}
+	if(pthread_create(&n_thread_jogador2, NULL, thread_jogador2, &in)) {exit(1);}
 
 	/* Libera threads */
 	pthread_join(n_thread_confereVencedor, NULL);
