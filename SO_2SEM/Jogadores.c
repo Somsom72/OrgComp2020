@@ -6,7 +6,7 @@ int atualizaPlacar(float *placar, int *j, float fator_inercia, int dir)
 {
     if(placar == NULL || j == NULL) {return 1;}
 
-    /* move placar para esquerda */
+    /* move placar e esvazia buffer do jogador */
     *placar += ((float)*j) * (dir); *j = 0;
 
     /* inércia */
