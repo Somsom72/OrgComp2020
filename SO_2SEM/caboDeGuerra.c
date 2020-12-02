@@ -12,7 +12,6 @@
 
 /* INÍCIO: DECLARAÇÃO DAS FUNÇÕES QUE SERÃO EXECUTADAS COMO THREADS, E SUAS STRUCTS DE ENTRADA */
 
-
 /** 
  * \brief Struct de entrada das threads. 
  */
@@ -69,35 +68,6 @@ void *thread_confereVencedor(void *void_ptr_Infos)
 	}
 }
 
-/** 
- * \brief Thread responsáveis por atualizar o placar (região crítica deste), dada uma apertada do jogador1.  
- */
-void *thread_jogador1(void *void_ptr_Infos)
-{
-	Infos *ptr_Infos = (Infos *)void_ptr_Infos;
-
-	/* Enquanto não há vencedor, atualiza o placar de acordo com o buffer do jogador1 */
-	while(*(ptr_Infos -> ptr_quemVenceu) == 0)
-	{
-		atualizaPlacar1(ptr_Infos -> ptr_placar, ptr_Infos -> ptr_j1);
-	}
-}
-
-/** 
- * \brief Thread responsáveis por atualizar o placar (região crítica deste), dada uma apertada do jogador2.  
- */
-void *thread_jogador2(void *void_ptr_Infos)
-{
-	Infos *ptr_Infos = (Infos *)void_ptr_Infos;
-
-	/* Enquanto não há vencedor, atualiza o placar de acordo com o buffer do jogador2 */
-	while(*(ptr_Infos -> ptr_quemVenceu) == 0)
-	{
-		atualizaPlacar2(ptr_Infos -> ptr_placar, ptr_Infos -> ptr_j2);
-	}
-}
-
-
 /* FIM: DECLARAÇÃO DAS FUNÇÕES QUE SERÃO EXECUTADAS COMO THREADS, E SUAS STRUCTS DE ENTRADA */
 
 /**
@@ -128,7 +98,7 @@ int jogo(void)
 	pthread_t n_thread_confereVencedor;
 	pthread_t n_thread_jogador1, n_thread_jogador2;
 
-	//init_all_sem();
+	init_all_sem();
 
 	/* Inicializa struct de entrada e as threads. */
 	Infos in;
@@ -138,10 +108,8 @@ int jogo(void)
 	in.ptr_quemVenceu = &quemVenceu;
 	if(pthread_create(&n_thread_entrada, NULL, thread_entrada, &in)) {exit(1);}
 	if(pthread_create(&n_thread_saida, NULL, thread_saida, &in)) {exit(1);}
-	if(pthread_create(&n_thread_jogador1, NULL, thread_jogador1, &in)) {exit(1);}
-	if(pthread_create(&n_thread_jogador2, NULL, thread_jogador2, &in)) {exit(1);}
-	//pthread_create(&n_thread_jogador1, NULL, (void *) consumer, (void *)&in);
-	//pthread_create(&n_thread_jogador2, NULL, (void *) producer, (void *)&in);
+	if (pthread_create(&n_thread_jogador1, NULL, (void *) consumer, (void *)&in)) {exit(1);};
+	if (pthread_create(&n_thread_jogador2, NULL, (void *) producer, (void *)&in)) {exit(1);};
 
 	/* Libera threads */
 	pthread_join(n_thread_confereVencedor, NULL);
@@ -150,7 +118,7 @@ int jogo(void)
 	pthread_join(n_thread_jogador1, NULL);
 	pthread_join(n_thread_jogador2, NULL);
 
-	//destroy_all_sem();
+	destroy_all_sem();
 
     return quemVenceu;
 }

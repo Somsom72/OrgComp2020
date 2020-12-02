@@ -9,14 +9,14 @@
 /**
  * \brief Executa uma thread produtora, que produz um determinado item inteiro.
  * 
- * \param pno Ponteiro para a thread atual.
+ * \param pno Ponteiro para informações da thread atual.
 */
 void *producer(void *pno);
 
 /**
  * \brief Executa uma thread consumidora, que consome um determinado item inteiro.
  * 
- * \param cno Ponteiro para a thread atual.
+ * \param cno Ponteiro para informações da thread atual.
 */
 void *consumer(void *cno);
 
