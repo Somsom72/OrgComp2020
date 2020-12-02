@@ -1,28 +1,19 @@
 #include <stdio.h>
 #include "Jogadores.h"
 
-int atualizaPlacar1(float *placar, int *j, float fator_inercia)
+#define INERTIA_FACTOR 0.1;
+
+int updateScoreboard(float* scoreboard, int* item, int direction)
 {
-    if(placar == NULL || j == NULL) {return 1;}
+    if (scoreboard == NULL || item == NULL)
+        return 1;
 
-    /* move placar para esquerda*/
-    *placar -= (float)*j; *j = 0;
+    /* Move to the direction (-1 - left or 1 - right) */
+    *scoreboard += (float) (*item) * direction; 
+    *item = 0;
 
-    /* inércia */
-    *placar += (*placar) * fator_inercia;
-
-    return 0;
-}
-
-int atualizaPlacar2(float *placar, int *j, float fator_inercia)
-{
-    if(placar == NULL || j == NULL) {return 1;}
-
-    /* move placar para direita */
-    *placar += (float)*j; *j = 0;
-
-    /* inércia */
-    *placar += (*placar) * fator_inercia;
+    /* inertia factor */
+    *scoreboard += (*scoreboard) * INERTIA_FACTOR;
 
     return 0;
 }

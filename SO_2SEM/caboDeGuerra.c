@@ -9,7 +9,6 @@
 #include "Jogadores.h"
 #include "EntradaSaida.h"
 #include "Semaforo.h"
-#define FATOR_INERCIA 0.1
 
 /* INÍCIO: DECLARAÇÃO DAS FUNÇÕES QUE SERÃO EXECUTADAS COMO THREADS, E SUAS STRUCTS DE ENTRADA */
 
@@ -80,7 +79,7 @@ void *thread_jogador1(void *void_ptr_Infos)
 	/* Enquanto não há vencedor, atualiza o placar de acordo com o buffer do jogador1 */
 	while(*(ptr_Infos -> ptr_quemVenceu) == 0)
 	{
-		atualizaPlacar1(ptr_Infos -> ptr_placar, ptr_Infos -> ptr_j1, FATOR_INERCIA);
+		atualizaPlacar1(ptr_Infos -> ptr_placar, ptr_Infos -> ptr_j1);
 	}
 }
 
@@ -94,7 +93,7 @@ void *thread_jogador2(void *void_ptr_Infos)
 	/* Enquanto não há vencedor, atualiza o placar de acordo com o buffer do jogador2 */
 	while(*(ptr_Infos -> ptr_quemVenceu) == 0)
 	{
-		atualizaPlacar2(ptr_Infos -> ptr_placar, ptr_Infos -> ptr_j2, FATOR_INERCIA);
+		atualizaPlacar2(ptr_Infos -> ptr_placar, ptr_Infos -> ptr_j2);
 	}
 }
 
