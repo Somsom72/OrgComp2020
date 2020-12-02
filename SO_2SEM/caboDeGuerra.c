@@ -10,29 +10,33 @@
 #include "EntradaSaida.h"
 #include "Semaforo.h"
 
+#define MAX 15
+
 /* INÍCIO: DECLARAÇÃO DAS FUNÇÕES QUE SERÃO EXECUTADAS COMO THREADS, E SUAS STRUCTS DE ENTRADA */
 
 /** 
  * \brief Struct de entrada das threads. 
  */
 typedef struct {
+	char nome_jogador1[MAX];
+	char nome_jogador2[MAX];
 	int *ptr_j1;
 	int *ptr_j2;
 	float *ptr_placar;
 	int *ptr_quemVenceu;
-} Infos;
+} Infos, *ptrInfos;
 
 /** 
  * \brief Thread responsável por incrementar jogador1/2 dependendo das entradas dos usuários. 
  */
 void *thread_entrada(void *void_ptr_Infos)
 {
-	Infos *ptr_Infos = (Infos *)void_ptr_Infos;
+	ptrInfos ptr_Infos = (ptrInfos)void_ptr_Infos;
 
 	system ("/bin/stty raw");
 
 	/* Enquanto não há vencedor, capta entradas relevantes para atualizar os buffers do jogador1 e jogador2 */
-	while(*(ptr_Infos -> ptr_quemVenceu) == 0)
+	while(ptr_Infos -> ptr_quemVenceu == 0)
 	{
 		captaEntrada(ptr_Infos -> ptr_j1, ptr_Infos -> ptr_j2);
 	}
@@ -50,7 +54,7 @@ void *thread_saida(void *void_ptr_Infos)
 	/* Enquanto não há vencedor, imprime a animação de saída utilizando o valor atual do placar */
 	while(*(ptr_Infos -> ptr_quemVenceu) == 0)
 	{
-		imprimeSaida(ptr_Infos -> ptr_placar);
+		imprimeSaida(ptr_Infos -> ptr_placar, ptr_Infos->nome_jogador1, ptr_Infos->nome_jogador2);
 	}
 }
 
@@ -86,7 +90,7 @@ void Menu(){
  * 
  * \return 1 caso jogador1 venceu, 2 caso perdeu.
  */
-int jogo(void)
+int jogo(char *nome1, char *nome2)
 {
     int jogador1 = 0, jogador2 = 0; ///< Variáveis "buffers" dos jogadores.
 	float placar = 0; ///< Valor do placar atual;
@@ -106,6 +110,8 @@ int jogo(void)
 	in.ptr_j2 = &jogador2;
 	in.ptr_placar = &placar;
 	in.ptr_quemVenceu = &quemVenceu;
+	strcpy(in.nome_jogador1, nome1);
+	strcpy(in.nome_jogador2, nome2);
 	if(pthread_create(&n_thread_entrada, NULL, thread_entrada, &in)) {exit(1);}
 	if(pthread_create(&n_thread_saida, NULL, thread_saida, &in)) {exit(1);}
 	if (pthread_create(&n_thread_jogador1, NULL, (void *) consumer, (void *)&in)) {exit(1);};
@@ -129,6 +135,10 @@ int jogo(void)
 int main(void)
 {
     char opcao;
+	char nome1[MAX];
+	char nome2[MAX];
+	memset(nome1, 'k', strlen(nome1));
+	memset(nome2, 's', strlen(nome2));
 
     while(1)
     {
@@ -142,13 +152,21 @@ int main(void)
 
         if(opcao == 's')
 		{
+			printf("Primeiramente, digite o nome dos dois jogadores, encerrando com um enter (máximo 15 letras).\n");
+			printf("Jogador 1:");
+			scanf("%[^\n]%*c", nome1);
+			getchar();
+			printf("Jogador 2:");
+			scanf("%[^\n]%*c", nome2);
+			getchar();
+
 			inicio = clock();
-			quemVenceu = jogo();
+			quemVenceu = jogo(nome1, nome2);
 			fim = clock();
 
 			printf("\n\nO jogo demorou %.1lf segundos e ", (double)fim-inicio);
-			if(quemVenceu == 1) {printf("o jogador 1 venceu!!\n\n");}
-			else {printf("o jogador 2 venceu!!\n\n");}
+			if(quemVenceu == 1) {printf("%s venceu!!\n\n", nome1);}
+			else {printf("%s venceu!!\n\n", nome2);}
 		}
 
         else if(opcao == 'k')

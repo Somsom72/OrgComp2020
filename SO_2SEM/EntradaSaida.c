@@ -12,7 +12,7 @@ void captaEntrada(int* pontuacao1, int* pontuacao2){
     return;
 }
 
-void imprimeSaida(float* placar){
+void imprimeSaida(float* placar, char *nome1, char *nome2){
 
     int i;
 
@@ -38,9 +38,9 @@ void imprimeSaida(float* placar){
 
     printf("k\r\n");
 
-    if(placar==0) printf("\rPlacarAtual: 0. Está tudo empatado!\r\n");
-    else if(placar<0) printf("\rPlacarAtual: %d de vantagem para o jogador 1\r\n",abs(*placar));
-    else printf("\rPlacarAtual: %d de vantagem para o jogador 2\r\n",abs(*placar));
+    if(placar==0) printf("\rPlacarAtual: 0. Está tudo empatado!\r\n\n");
+    else if(placar<0) printf("\rPlacarAtual: %d de vantagem para %s\r\n\n",abs(*placar), nome1);
+    else printf("\rPlacarAtual: %d de vantagem para %s\r\n\n",abs(*placar), nome2);
 
     return;
 }
