@@ -10,17 +10,7 @@
 #include "EntradaSaida.h"
 #include "Semaforo.h"
 
-/* INÍCIO: DECLARAÇÃO DAS FUNÇÕES QUE SERÃO EXECUTADAS COMO THREADS, E SUAS STRUCTS DE ENTRADA */
-
-/** 
- * \brief Struct de entrada das threads. 
- */
-typedef struct {
-	int *ptr_j1;
-	int *ptr_j2;
-	float *ptr_placar;
-	int *ptr_quemVenceu;
-} Infos;
+/* INÍCIO: DECLARAÇÃO DAS FUNÇÕES QUE SERÃO EXECUTADAS COMO THREADS */
 
 /** 
  * \brief Thread responsável por incrementar jogador1/2 dependendo das entradas dos usuários. 
@@ -68,7 +58,7 @@ void *thread_confereVencedor(void *void_ptr_Infos)
 	}
 }
 
-/* FIM: DECLARAÇÃO DAS FUNÇÕES QUE SERÃO EXECUTADAS COMO THREADS, E SUAS STRUCTS DE ENTRADA */
+/* FIM: DECLARAÇÃO DAS FUNÇÕES QUE SERÃO EXECUTADAS COMO THREADS */
 
 /**
  * \brief Menu de abertura do jogo com as opções de jogar 's' e sair 'k'.

@@ -49,10 +49,10 @@ void destroy_all_sem()
 
 void enter_item(float* placar, int* pontuacao)
 {
-    atualizaPlacar(placar, pontuacao, 1);
+    atualizaPlacar(placar, pontuacao, FATOR_INERCIA, 1);
 }
 
 void remove_item(float* placar, int* pontuacao)
 {
-    atualizaPlacar(placar, pontuacao, -1);
+    atualizaPlacar(placar, pontuacao, FATOR_INERCIA, -1);
 }
