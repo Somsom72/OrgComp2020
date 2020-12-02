@@ -72,7 +72,7 @@ void *thread_confereVencedor(void *void_ptr_Infos)
 	}
 }
 
-/* FIM: DECLARAÇÃO DAS FUNÇÕES QUE SERÃO EXECUTADAS COMO THREADS, E SUAS STRUCTS DE ENTRADA */
+/* FIM: DECLARAÇÃO DAS FUNÇÕES QUE SERÃO EXECUTADAS COMO THREADS */
 
 /**
  * \brief Menu de abertura do jogo com as opções de jogar 's' e sair 'k'.
