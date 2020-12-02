@@ -6,6 +6,9 @@
 #ifndef JOGADORES_H
 #define JOGADORES_H
 
+#define INERTIA_FACTOR 0.1
+#define DURACAO_DO_JOGO 100
+
 /**
  * \brief Descarrega buffer do jogador, atualizando o placar para a direção negativa.
  * 

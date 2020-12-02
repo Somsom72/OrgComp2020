@@ -1,52 +1,46 @@
 #include "EntradaSaida.h"
 
-int main(void){
+void captaEntrada(int* pontuacao1, int* pontuacao2){
 
-    char opcao=0;
+    char opcao;
 
-    int i,j, placarAtual;
+    opcao=getchar();
 
-    placarAtual=20;
+    if(opcao=='s') *pontuacao1= *pontuacao1 + 1;
+    else if (opcao == 'k') *pontuacao2= *pontuacao2 + 1;
 
-    system ("/bin/stty raw");
+    return;
+}
 
-    while(opcao!='q'){
+void imprimeSaida(float* placar){
 
-        opcao=getchar();
+    int i;
 
-        if(opcao == 'a') placarAtual++;
-        else if(opcao == 'b') placarAtual--;
+    system ("clear");
 
-        system ("clear");
+    printf("O cabo de guerras está valéndo!\n Pressione s para puxar o cabo para a esquerda e k para puxa-lo para a direita\n");
 
-        printf("\ri");
+    printf("\rs");
 
-        for(i=0;i<placarAtual;i++) printf(" ");
+    if(placar<0){
+        for(i=-1*DURACAO_DO_JOGO;i<*placar;i++) printf(" ");
+        printf("|"); for(i=0;i<TAMANHO_DA_CORDA;i++) printf("-"); printf("|");
+        for(i=0;i<DURACAO_DO_JOGO;i++) printf(" ");
+        for(i=0;i<abs(*placar);i++) printf(" ");
+    } 
 
-        printf("|");
+    else{
+        for(i=0;i<DURACAO_DO_JOGO;i++) printf(" ");
+        for(i=0;i<*placar;i++) printf(" ");
+        printf("|"); for(i=0;i<TAMANHO_DA_CORDA;i++) printf("-"); printf("|");
+        for(i=(int)*placar;i<DURACAO_DO_JOGO;i++) printf(" ");
+    } 
 
-        for(j=0;j<10;j++) printf("-");
-        
-        printf("|");
+    printf("k\r\n");
 
-        for(;i<40;i++) printf(" ");
+    if(placar==0) printf("\rPlacarAtual: 0. Está tudo empatado!\r\n");
+    else if(placar<0) printf("\rPlacarAtual: %d de vantagem para o jogador 1\r\n",abs(*placar));
+    else printf("\rPlacarAtual: %d de vantagem para o jogador 2\r\n",abs(*placar));
 
-        printf("f\r\n");
-        
-        printf("\rplacarAtual: %d\r\n",placarAtual);
-
-        if(placarAtual==0){
-            printf("\rAzul venceu!!\n");
-            opcao='q';
-        }
-        else if(placarAtual==40){
-            printf("\rVermelho venceu!!\n");
-            opcao='q';
-        }
-
-    }
-
-    system ("/bin/stty cooked");
-
-    return 0;
+    return;
 }

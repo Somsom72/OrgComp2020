@@ -24,7 +24,7 @@ void *producer(void *prod_info)
 
 void *consumer(void *cons_info)
 {  
-    while(*(cons_info -> ptr_quemVenceu) == 0){
+    while(*(cons_info) -> ptr_quemVenceu == 0){
         sem_wait(&full); //down full
         pthread_mutex_lock(&mutex); //down mutex
         remove_item(cons_info -> ptr_placar, cons_info -> ptr_j1); //using critical region
@@ -47,12 +47,12 @@ void destroy_all_sem()
     pthread_mutex_destroy(&mutex);
 }
 
-void enter_item(float* scoreboard, int* item)
+void enter_item(float* placar, int* pontuacao)
 {
-    updateScoreboard(scoreboard, item, 1);
+    atualizaPlacar(placar, pontuacao, 1);
 }
 
-void remove_item(float* scoreboard, int* item)
+void remove_item(float* placar, int* pontuacao)
 {
-    updateScoreboard(scoreboard, item, -1);
+    atualizaPlacar(placar, pontuacao, -1);
 }

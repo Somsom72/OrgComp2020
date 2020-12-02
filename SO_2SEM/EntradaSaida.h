@@ -18,4 +18,12 @@
 
 #define ENTRADASAIDA_H
 
+#define DURACAO_DO_JOGO 100
+
+#define TAMANHO_DA_CORDA 15
+
+void captaEntrada(int* pontuacao1, int* pontuacao2);
+
+void imprimeSaida(float* placar);
+
 #endif

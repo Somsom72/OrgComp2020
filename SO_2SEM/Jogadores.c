@@ -1,26 +1,24 @@
 #include <stdio.h>
 #include "Jogadores.h"
 
-#define INERTIA_FACTOR 0.1;
-
-int updateScoreboard(float* scoreboard, int* item, int direction)
+int atualizaPlacar(float* placar, int* pontuacao, int direcao)
 {
-    if (scoreboard == NULL || item == NULL)
-        return 1;
+    if (placar == NULL || pontuacao== NULL) 
+        return 1; // Erro
 
     /* Move to the direction (-1 - left or 1 - right) */
-    *scoreboard += (float) (*item) * direction; 
-    *item = 0;
+    *placar += (float) (*pontuacao) * direcao; 
+    *pontuacao = 0;
 
     /* inertia factor */
-    *scoreboard += (*scoreboard) * INERTIA_FACTOR;
+    *placar += (*placar) * INERTIA_FACTOR;
 
     return 0;
 }
 
 int determinaVencedor(float placar)
 {
-    if(placar <= -100) {return 1;}
-    else if(placar >= 100) {return 2;}
-    return 0;
+    if(placar <= -1*DURACAO_DO_JOGO) {return 1;}
+    else if(placar >= DURACAO_DO_JOGO) {return 2;}
+    else return 0;
 }
