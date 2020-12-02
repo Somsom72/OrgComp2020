@@ -24,6 +24,6 @@
 
 void captaEntrada(int* pontuacao1, int* pontuacao2);
 
-void imprimeSaida(float* placar);
+void imprimeSaida(float* placar, char *nome1, char *nome2);
 
 #endif
