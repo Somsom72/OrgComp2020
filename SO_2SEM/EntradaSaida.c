@@ -4,9 +4,9 @@ int main(void){
 
     char opcao=0;
 
-    int i,j, placaratual;
+    int i,j, placarAtual;
 
-    placaratual=20;
+    placarAtual=20;
 
     system ("/bin/stty raw");
 
@@ -14,14 +14,14 @@ int main(void){
 
         opcao=getchar();
 
-        if(opcao == 'a') placaratual++;
-        else if(opcao == 'b') placaratual--;
+        if(opcao == 'a') placarAtual++;
+        else if(opcao == 'b') placarAtual--;
 
         system ("clear");
 
         printf("\ri");
 
-        for(i=0;i<placaratual;i++) printf(" ");
+        for(i=0;i<placarAtual;i++) printf(" ");
 
         printf("|");
 
@@ -33,13 +33,13 @@ int main(void){
 
         printf("f\r\n");
         
-        printf("\rPlacaratual: %d\r\n",placaratual);
+        printf("\rplacarAtual: %d\r\n",placarAtual);
 
-        if(placaratual==0){
+        if(placarAtual==0){
             printf("\rAzul venceu!!\n");
             opcao='q';
         }
-        else if(placaratual==40){
+        else if(placarAtual==40){
             printf("\rVermelho venceu!!\n");
             opcao='q';
         }

@@ -105,7 +105,7 @@ void *thread_jogador2(void *void_ptr_Infos)
  * \brief Menu de abertura do jogo com as opções de jogar 's' e sair 'k'.
  */
 void Menu(){
-	printf("\n\n=========== Bem-vinde ao Cabo de Guerra ===========\n");
+	printf("\n\n=========== Boas-vindas ao Cabo de Guerra ===========\n");
 	printf("\nSelecione uma das opções abaixo:");
     printf("\n\nJogar: 's'\nSair: 'k'\n\n");
 	
@@ -129,6 +129,8 @@ int jogo(void)
 	pthread_t n_thread_confereVencedor;
 	pthread_t n_thread_jogador1, n_thread_jogador2;
 
+	//init_all_sem();
+
 	/* Inicializa struct de entrada e as threads. */
 	Infos in;
 	in.ptr_j1 = &jogador1;
@@ -139,6 +141,8 @@ int jogo(void)
 	if(pthread_create(&n_thread_saida, NULL, thread_saida, &in)) {exit(1);}
 	if(pthread_create(&n_thread_jogador1, NULL, thread_jogador1, &in)) {exit(1);}
 	if(pthread_create(&n_thread_jogador2, NULL, thread_jogador2, &in)) {exit(1);}
+	//pthread_create(&n_thread_jogador1, NULL, (void *) consumer, (void *)&in);
+	//pthread_create(&n_thread_jogador2, NULL, (void *) producer, (void *)&in);
 
 	/* Libera threads */
 	pthread_join(n_thread_confereVencedor, NULL);
@@ -146,6 +150,8 @@ int jogo(void)
 	pthread_join(n_thread_saida, NULL);
 	pthread_join(n_thread_jogador1, NULL);
 	pthread_join(n_thread_jogador2, NULL);
+
+	//destroy_all_sem();
 
     return quemVenceu;
 }
