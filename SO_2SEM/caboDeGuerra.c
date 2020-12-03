@@ -54,8 +54,6 @@ int main(void)
     char opcao;
 	char nome1[MAX_CARACTERES];
 	char nome2[MAX_CARACTERES];
-	memset(nome1, 'k', strlen(nome1));
-	memset(nome2, 's', strlen(nome2));
 
     while(1)
     {
@@ -69,11 +67,14 @@ int main(void)
 
         if(opcao == 's')
 		{
+			memset(nome1, '\0', strlen(nome1));
+			memset(nome2, '\0', strlen(nome2));
+			
 			printf("Primeiramente, digite o nome dos dois jogadores, encerrando com um enter (máximo 15 letras).\n");
-			printf("Jogador 1:");
+			printf("Jogador 1: ");
 			scanf("%[^\n]%*c", nome1);
 			
-			printf("Jogador 2:");
+			printf("Jogador 2: ");
 			scanf("%[^\n]%*c", nome2);
 
 			inicio = clock();
