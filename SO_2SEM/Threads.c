@@ -4,7 +4,7 @@ void *thread_entrada(void *void_ptr_Infos)
 {
 	Infos* ptr_Infos = (Infos*) void_ptr_Infos;
 
-	system ("/bin/stty raw");
+	system ("/bin/stty raw -echo");
 
 	/* Enquanto não há vencedor, capta entradas relevantes para atualizar os buffers do jogador1 e do jogador2 */
 	while(*(ptr_Infos -> ptr_quemVenceu) == 0)
