@@ -5,7 +5,7 @@
 Jogador inicializarJogador(char* nome, int* ptr_buffer)
 {
     Jogador j;
-    strcpy(j.nome, nome);
+    strncpy(j.nome, nome, strlen(nome));
     j.ptr_buffer = ptr_buffer;
 
     return j;
