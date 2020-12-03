@@ -72,10 +72,9 @@ int main(void)
 			printf("Primeiramente, digite o nome dos dois jogadores, encerrando com um enter (máximo 15 letras).\n");
 			printf("Jogador 1:");
 			scanf("%[^\n]%*c", nome1);
-			getchar();
+			
 			printf("Jogador 2:");
 			scanf("%[^\n]%*c", nome2);
-			getchar();
 
 			inicio = clock();
 			quemVenceu = iniciarJogo(nome1, nome2);
