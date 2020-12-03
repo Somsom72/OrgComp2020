@@ -1,6 +1,24 @@
 #include <stdio.h>
+#include <string.h>
 #include "Jogadores.h"
-#include "EntradaSaida.h"
+
+Jogador inicializarJogador(char* nome, int* ptr_buffer)
+{
+    Jogador j;
+    strcpy(j.nome, nome);
+    j.ptr_buffer = ptr_buffer;
+}
+
+Infos inicializarInfos(Jogador j1, Jogador j2, float* ptr_placar, int* ptr_quemVenceu)
+{
+    Infos in;
+    in.jogador1 = j1;
+    in.jogador2 = j2;
+    in.ptr_placar = ptr_placar;
+    in.ptr_quemVenceu = ptr_quemVenceu;
+
+    return in;
+}
 
 int atualizaPlacar(float *placar, int *j, float fator_inercia, int dir)
 {

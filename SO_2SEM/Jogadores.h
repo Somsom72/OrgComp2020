@@ -6,17 +6,26 @@
 #ifndef JOGADORES_H
 #define JOGADORES_H
 
-#define FATOR_INERCIA 0.1
+#include "defines.h"
+
+typedef struct {
+	char nome[MAX_CARACTERES];
+	int *ptr_buffer;
+} Jogador;
 
 /** 
  * \brief Struct de entrada das threads. 
  */
 typedef struct {
-	int *ptr_j1;
-	int *ptr_j2;
+	Jogador jogador1;
+	Jogador jogador2;
 	float *ptr_placar;
 	int *ptr_quemVenceu;
 } Infos;
+
+Jogador inicializarJogador(char* nome, int* ptr_buffer);
+
+Infos inicializarInfos(Jogador j1, Jogador j2, float* ptr_placar, int* ptr_quemVenceu);
 
 /**
  * \brief Descarrega buffer do jogador, atualizando o placar para a direção especificada.

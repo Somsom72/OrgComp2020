@@ -2,21 +2,22 @@
 #include <pthread.h>
 #include <semaphore.h>
 #include "Jogadores.h"
+#include "defines.h"
 #include <stdlib.h>
 #include <stdio.h>
 
-#define N 200 // Maximum items a producer can produce or a consumer can consume
-
 sem_t empty;
 sem_t full;
-pthread_mutex_t mutex = 1;
+pthread_mutex_t mutex;
 
 void *producer(void *prod_info)
-{  
-    while(*(prod_info -> ptr_quemVenceu) == 0){
+{
+    Infos* info = (Infos*) prod_info;
+
+    while(*(info -> ptr_quemVenceu) == 0){
         sem_wait(&empty); //down empty
         pthread_mutex_lock(&mutex); //down mutex
-        enter_item(prod_info -> ptr_placar, prod_info -> ptr_j2); //using critical region
+        enter_item(info -> ptr_placar, info -> jogador2.ptr_buffer); //using critical region
         pthread_mutex_unlock(&mutex); //up mutex
         sem_post(&full); //up full
     }
@@ -24,10 +25,12 @@ void *producer(void *prod_info)
 
 void *consumer(void *cons_info)
 {  
-    while(*(cons_info) -> ptr_quemVenceu == 0){
+    Infos* info = (Infos*) cons_info;
+
+    while(*(info -> ptr_quemVenceu) == 0){
         sem_wait(&full); //down full
         pthread_mutex_lock(&mutex); //down mutex
-        remove_item(cons_info -> ptr_placar, cons_info -> ptr_j1); //using critical region
+        remove_item(info -> ptr_placar, info -> jogador1.ptr_buffer); //using critical region
         pthread_mutex_unlock(&mutex); //up mutex
         sem_post(&empty); //up empty
     }
@@ -35,7 +38,7 @@ void *consumer(void *cons_info)
 
 void init_all_sem()
 {
-    sem_init(&empty, 0, N); //shared with all threads and with initial value N
+    sem_init(&empty, 0, MAX_ITENS); //shared with all threads and with initial value N
     sem_init(&full, 0, 0); //shared with all threads and with initial value 0
     pthread_mutex_init(&mutex, NULL); //By default, the initial state of *mutex will be "initialized and unlocked"
 }

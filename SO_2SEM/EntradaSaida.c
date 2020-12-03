@@ -1,4 +1,5 @@
 #include "EntradaSaida.h"
+#include "defines.h"
 
 void captaEntrada(int* pontuacao1, int* pontuacao2){
 
@@ -13,12 +14,12 @@ void captaEntrada(int* pontuacao1, int* pontuacao2){
 }
 
 void imprimeSaida(float* placar, char *nome1, char *nome2){
-
+    
     int i;
 
     system ("clear");
 
-    printf("O cabo de guerras está valéndo!\n Pressione s para puxar o cabo para a esquerda e k para puxa-lo para a direita\n");
+    printf("O cabo de guerras está valendo!\n Pressione 's' para puxar o cabo para a esquerda ou 'k' para puxá-lo para a direita\n");
 
     printf("\rs");
 
