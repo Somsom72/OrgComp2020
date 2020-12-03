@@ -1,11 +1,5 @@
-/* INÍCIO: DECLARAÇÃO DAS FUNÇÕES QUE SERÃO EXECUTADAS COMO THREADS, E SUAS STRUCTS DE ENTRADA */
-#include "EntradaSaida.h"
-#include "Semaforo.h"
 #include "Threads.h"
 
-/** 
- * \brief Thread responsável por incrementar jogador1/2 dependendo das entradas dos usuários. 
- */
 void *thread_entrada(void *void_ptr_Infos)
 {
 	Infos* ptr_Infos = (Infos*) void_ptr_Infos;
@@ -21,9 +15,6 @@ void *thread_entrada(void *void_ptr_Infos)
 	system ("/bin/stty cooked");
 }
 
-/** 
- * \brief Thread responsável por imprimir os gráficos de saída, dependendo do valor do placar. 
- */
 void *thread_saida(void *void_ptr_Infos)
 {
 	Infos *ptr_Infos = (Infos *)void_ptr_Infos;
@@ -35,9 +26,6 @@ void *thread_saida(void *void_ptr_Infos)
 	}
 }
 
-/** 
- * \brief Thread responsável por manter a variável "quemVenceu" atualizada. 
- */
 void *thread_confereVencedor(void *void_ptr_Infos)
 {
 	Infos *ptr_Infos = (Infos *)void_ptr_Infos;

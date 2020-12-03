@@ -8,6 +8,9 @@
 
 #include "defines.h"
 
+/** 
+ * \brief Struct que representa um jogador.  
+ */
 typedef struct {
 	char nome[MAX_CARACTERES];
 	int *ptr_buffer;
@@ -23,8 +26,27 @@ typedef struct {
 	int *ptr_quemVenceu;
 } Infos;
 
+/** 
+ * \brief Inicializa uma struct Jogador. 
+ * 
+ * \param nome Nome do jogador. 
+ * \param ptr_buffer Buffer de pontos do jogador. 
+ * 
+ * \return Objeto Jogador. 
+ */
 Jogador inicializarJogador(char* nome, int* ptr_buffer);
 
+
+/** 
+ * \brief Inicializa uma struct Infos. 
+ * 
+ * \param j1 Objeto jogador1. 
+ * \param j2 Objeto jogador2.
+ * \param ptr_placar Ponteiro para o placar atual. 
+ * \param ptr_quemVenceu Ponteiro para a flag de término de jogo.  
+ * 
+ * \return Objeto Infos. 
+ */
 Infos inicializarInfos(Jogador j1, Jogador j2, float* ptr_placar, int* ptr_quemVenceu);
 
 /**

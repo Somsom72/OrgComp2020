@@ -7,6 +7,8 @@ Jogador inicializarJogador(char* nome, int* ptr_buffer)
     Jogador j;
     strcpy(j.nome, nome);
     j.ptr_buffer = ptr_buffer;
+
+    return j;
 }
 
 Infos inicializarInfos(Jogador j1, Jogador j2, float* ptr_placar, int* ptr_quemVenceu)
