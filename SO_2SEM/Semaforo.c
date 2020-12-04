@@ -15,11 +15,13 @@ void *producer(void *prod_info)
     Infos* info = (Infos*) prod_info;
 
     while(*(info -> ptr_quemVenceu) == 0){
+		printf("acessando2\n");
         sem_wait(&empty); //down empty
         pthread_mutex_lock(&mutex); //down mutex
         enter_item(info -> ptr_placar, info -> jogador2.ptr_buffer); //using critical region
         pthread_mutex_unlock(&mutex); //up mutex
         sem_post(&full); //up full
+		printf("saindo2\n");
     }
 }
 
@@ -28,18 +30,20 @@ void *consumer(void *cons_info)
     Infos* info = (Infos*) cons_info;
 
     while(*(info -> ptr_quemVenceu) == 0){
+		printf("acessando1\n");
         sem_wait(&full); //down full
         pthread_mutex_lock(&mutex); //down mutex
         remove_item(info -> ptr_placar, info -> jogador1.ptr_buffer); //using critical region
         pthread_mutex_unlock(&mutex); //up mutex
         sem_post(&empty); //up empty
+		printf("saindo1\n");
     }
 }
 
 void init_all_sem()
 {
-    sem_init(&empty, 0, MAX_ITENS); //shared with all threads and with initial value N
     sem_init(&full, 0, 0); //shared with all threads and with initial value 0
+    sem_init(&empty, 0, MAX_ITENS); //shared with all threads and with initial value N
     pthread_mutex_init(&mutex, NULL); //By default, the initial state of *mutex will be "initialized and unlocked"
 }
 

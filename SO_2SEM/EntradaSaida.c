@@ -5,10 +5,10 @@ void captaEntrada(int* pontuacao1, int* pontuacao2){
 
     char opcao;
 
-    opcao=getchar();
+    opcao = getchar();
 
-    if(opcao=='s') *pontuacao1= *pontuacao1 + 1;
-    else if (opcao == 'k') *pontuacao2= *pontuacao2 + 1;
+    if(opcao=='s') (*pontuacao1)++;
+    else if (opcao == 'k') (*pontuacao2)++;
 
     return;
 }
@@ -19,7 +19,7 @@ void imprimeSaida(float* placar, char *nome1, char *nome2){
 
     system ("clear");
 
-    printf("O cabo de guerras está valendo!\n Pressione 's' para puxar o cabo para a esquerda ou 'k' para puxá-lo para a direita\n");
+    printf("O cabo de guerras está valendo!\nPressione 's' para puxar o cabo para a esquerda ou 'k' para puxá-lo para a direita\n");
 
     printf("\rs");
 

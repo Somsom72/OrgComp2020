@@ -41,11 +41,11 @@ void criarThreads(Threads t, Infos info)
 {
 	init_all_sem();
 
+	if (pthread_create(&(t.jogador2), NULL, (void *) producer, &info)) {exit(1);};
     if (pthread_create(&(t.entrada), NULL, thread_entrada, &info)) {exit(1);}
+	if (pthread_create(&(t.jogador1), NULL, (void *) consumer, &info)) {exit(1);};
 	if (pthread_create(&(t.saida), NULL, thread_saida, &info)) {exit(1);}
     if (pthread_create(&(t.verificadorVitoria), NULL, thread_confereVencedor, &info)) {exit(1);}
-	if (pthread_create(&(t.jogador1), NULL, (void *) consumer, &info)) {exit(1);};
-	if (pthread_create(&(t.jogador2), NULL, (void *) producer, &info)) {exit(1);};
 }
 
 void liberarThreads(Threads t)
