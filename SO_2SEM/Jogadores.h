@@ -22,7 +22,7 @@ typedef struct {
 typedef struct {
 	Jogador jogador1;
 	Jogador jogador2;
-	float *ptr_placar;
+	int *ptr_placar;
 	int *ptr_quemVenceu;
 } Infos;
 
@@ -47,7 +47,7 @@ Jogador inicializarJogador(char* nome, int* ptr_buffer);
  * 
  * \return Objeto Infos. 
  */
-Infos inicializarInfos(Jogador j1, Jogador j2, float* ptr_placar, int* ptr_quemVenceu);
+Infos inicializarInfos(Jogador j1, Jogador j2, int* ptr_placar, int* ptr_quemVenceu);
 
 /**
  * \brief Descarrega buffer do jogador, atualizando o placar para a direção especificada.
@@ -62,7 +62,7 @@ Infos inicializarInfos(Jogador j1, Jogador j2, float* ptr_placar, int* ptr_quemV
  * 
  * \return 0 caso operação bem-sucedida; 1 caso contrário.
 */
-int atualizaPlacar(float *placar, int *j, float fator_inercia, int dir);
+int atualizaPlacar(int *placar, int *j, float fator_inercia, int dir);
 
 /**
  * \brief Dado um placar, determina se há algum vencedor. 
@@ -73,6 +73,6 @@ int atualizaPlacar(float *placar, int *j, float fator_inercia, int dir);
  * 
  * \return 0 caso ninguém venceu ainda; 1 caso jogador 1 (lado negativo); 2 caso jogador 2 (lado positivo).
 */
-int determinaVencedor(float placar);
+int determinaVencedor(int placar);
 
 #endif

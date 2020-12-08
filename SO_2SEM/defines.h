@@ -8,7 +8,7 @@
 
     #define FATOR_INERCIA 0.1
     #define MAX_CARACTERES 15
-    #define DURACAO_DO_JOGO 100
+    #define DURACAO_DO_JOGO 20
     #define TAMANHO_DA_CORDA 15
     #define TRUE 1
     #define FALSE 0

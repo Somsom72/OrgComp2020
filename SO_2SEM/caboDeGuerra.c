@@ -29,7 +29,7 @@ void mostrarMenu(){
 int iniciarJogo(char *nome1, char *nome2)
 {
     int buffer_jogador1 = 0, buffer_jogador2 = 0; ///< Variáveis "buffers" dos jogadores.
-	float placar = 0; ///< Valor do placar atual;
+	int placar = 0; ///< Valor do placar atual;
 	int quemVenceu = determinaVencedor(placar); ///< Variável indica se alguém venceu (e quem). Usado como condição de parada das threads. 
 
 	/* Declara identificadores das threads */
@@ -39,9 +39,11 @@ int iniciarJogo(char *nome1, char *nome2)
 	Jogador j2 = inicializarJogador(nome2, &buffer_jogador2);
 	Infos inf = inicializarInfos(j1, j2, &placar, &quemVenceu);
 
-	criarThreads(t, inf);
+	criarThreads(&t, &inf);
 
-	liberarThreads(t);
+	liberarThreads(&t);
+
+	//mataThread(&t);
 
     return quemVenceu;
 }
@@ -67,8 +69,8 @@ int main(void)
 
         if(opcao == 's')
 		{
-			memset(nome1, '\0', strlen(nome1));
-			memset(nome2, '\0', strlen(nome2));
+			memset(nome1, '\0', MAX_CARACTERES);
+			memset(nome2, '\0', MAX_CARACTERES);
 			
 			printf("Primeiramente, digite o nome dos dois jogadores, encerrando com um enter (máximo 15 letras).\n");
 			printf("Jogador 1: ");
@@ -81,7 +83,7 @@ int main(void)
 			quemVenceu = iniciarJogo(nome1, nome2);
 			fim = clock();
 
-			printf("\n\nO jogo demorou %.1lf segundos e ", (double)fim-inicio);
+			printf("\n\nO jogo demorou %.1lf segundos e ", (double)(fim-inicio)/CLOCKS_PER_SEC);
 			if(quemVenceu == 1) {printf("%s venceu!!\n\n", nome1);}
 			else {printf("%s venceu!!\n\n", nome2);}
 		}

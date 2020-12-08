@@ -45,13 +45,13 @@ void *thread_confereVencedor(void *void_ptr_Infos);
  * 
  * \param info Informações necessárias para o funcionamento das threads. 
  */
-void criarThreads(Threads t, Infos info);
+void criarThreads(Threads *t, Infos *info);
 
 /** 
  * \brief Thread responsável por manter a variável "quemVenceu" atualizada. 
  * 
  * \param t Armazena os identificadores das threads. 
  */
-void liberarThreads(Threads t);
+void liberarThreads(Threads *t);
 
 #endif

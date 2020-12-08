@@ -26,6 +26,6 @@ void captaEntrada(int* pontuacao1, int* pontuacao2);
  * \param nome1 Nome do jogador 1.
  * \param nome2 Nome do jogador 2.
  */
-void imprimeSaida(float* placar, char *nome1, char *nome2);
+void imprimeSaida(int* placar, char *nome1, char *nome2);
 
 #endif

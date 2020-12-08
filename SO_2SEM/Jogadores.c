@@ -11,7 +11,7 @@ Jogador inicializarJogador(char* nome, int* ptr_buffer)
     return j;
 }
 
-Infos inicializarInfos(Jogador j1, Jogador j2, float* ptr_placar, int* ptr_quemVenceu)
+Infos inicializarInfos(Jogador j1, Jogador j2, int* ptr_placar, int* ptr_quemVenceu)
 {
     Infos in;
     in.jogador1 = j1;
@@ -22,20 +22,23 @@ Infos inicializarInfos(Jogador j1, Jogador j2, float* ptr_placar, int* ptr_quemV
     return in;
 }
 
-int atualizaPlacar(float *placar, int *j, float fator_inercia, int dir)
+int atualizaPlacar(int *placar, int *j, float fator_inercia, int dir)
 {
+	//printf("Entrando atualiza placar\n");
     if(placar == NULL || j == NULL) {return 1;}
 
     /* move placar e esvazia buffer do jogador */
-    *placar += ((float)*j) * (dir); *j = 0;
+    (*placar) += (*j) * (dir);
+	(*j) = 0;
 
     /* inércia */
-    *placar += (*placar) * fator_inercia;
+    //*placar += (*placar) * fator_inercia;
 
+	//printf("Saindo atualiza placar\n");
     return 0;
 }
 
-int determinaVencedor(float placar)
+int determinaVencedor(int placar)
 {
     if(placar <= -1 * DURACAO_DO_JOGO) {return 1;}
     else if(placar >= DURACAO_DO_JOGO) {return 2;}

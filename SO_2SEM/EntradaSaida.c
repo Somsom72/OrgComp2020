@@ -5,7 +5,10 @@ void captaEntrada(int* pontuacao1, int* pontuacao2){
 
     char opcao;
 
+	system ("/bin/stty raw -echo");
     opcao = getchar();
+	
+	system ("/bin/stty cooked");
 
     if(opcao=='s') (*pontuacao1)++;
     else if (opcao == 'k') (*pontuacao2)++;
@@ -13,7 +16,7 @@ void captaEntrada(int* pontuacao1, int* pontuacao2){
     return;
 }
 
-void imprimeSaida(float* placar, char *nome1, char *nome2){
+void imprimeSaida(int* placar, char *nome1, char *nome2){
     
     int i;
 
@@ -39,9 +42,9 @@ void imprimeSaida(float* placar, char *nome1, char *nome2){
 
     printf("k\r\n");
 
-    if(placar==0) printf("\rPlacarAtual: 0. Está tudo empatado!\r\n\n");
-    else if(placar<0) printf("\rPlacarAtual: %d de vantagem para %s\r\n\n",abs(*placar), nome1);
-    else printf("\rPlacarAtual: %d de vantagem para %s\r\n\n",abs(*placar), nome2);
+    if(*placar==0) printf("\rPlacarAtual: 0. Está tudo empatado!\r\n\n");
+    else if(*placar<0) printf("\rPlacarAtual: %d de vantagem para %s\r\n\n",-(*placar), nome1);
+    else printf("\rPlacarAtual: %d de vantagem para %s\r\n\n",(*placar), nome2);
 
     return;
 }

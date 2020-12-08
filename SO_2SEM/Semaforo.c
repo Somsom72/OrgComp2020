@@ -15,14 +15,15 @@ void *producer(void *prod_info)
     Infos* info = (Infos*) prod_info;
 
     while(*(info -> ptr_quemVenceu) == 0){
-		printf("acessando2\n");
+		//printf("acessando produtor\n");
         sem_wait(&empty); //down empty
         pthread_mutex_lock(&mutex); //down mutex
         enter_item(info -> ptr_placar, info -> jogador2.ptr_buffer); //using critical region
         pthread_mutex_unlock(&mutex); //up mutex
         sem_post(&full); //up full
-		printf("saindo2\n");
+		//printf("saindo produtor\n");
     }
+	return NULL;
 }
 
 void *consumer(void *cons_info)
@@ -30,14 +31,15 @@ void *consumer(void *cons_info)
     Infos* info = (Infos*) cons_info;
 
     while(*(info -> ptr_quemVenceu) == 0){
-		printf("acessando1\n");
+		//printf("acessando consumidor\n");
         sem_wait(&full); //down full
         pthread_mutex_lock(&mutex); //down mutex
         remove_item(info -> ptr_placar, info -> jogador1.ptr_buffer); //using critical region
         pthread_mutex_unlock(&mutex); //up mutex
         sem_post(&empty); //up empty
-		printf("saindo1\n");
+		//printf("saindo consumidor\n");
     }
+	return NULL;
 }
 
 void init_all_sem()
@@ -54,12 +56,12 @@ void destroy_all_sem()
     pthread_mutex_destroy(&mutex);
 }
 
-void enter_item(float* placar, int* pontuacao)
+void enter_item(int* placar, int* pontuacao)
 {
     atualizaPlacar(placar, pontuacao, FATOR_INERCIA, 1);
 }
 
-void remove_item(float* placar, int* pontuacao)
+void remove_item(int* placar, int* pontuacao)
 {
     atualizaPlacar(placar, pontuacao, FATOR_INERCIA, -1);
 }
