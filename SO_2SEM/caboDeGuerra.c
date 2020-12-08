@@ -16,7 +16,7 @@
 void mostrarMenu(){
 	printf("\n\n=========== Boas-vindas ao Cabo de Guerra ===========\n");
 	printf("\nSelecione uma das opções abaixo:");
-    printf("\n\nJogar: 's'\nSair: 'k'\n\n");
+    printf("\n\nJogar(Play): 'p'\nSair(quit): 'q'\n\n");
 	
 	return;
 }
@@ -67,7 +67,7 @@ int main(void)
         scanf("%c", &opcao);
 		getchar();
 
-        if(opcao == 's')
+        if(opcao == 'p')
 		{
 			memset(nome1, '\0', MAX_CARACTERES);
 			memset(nome2, '\0', MAX_CARACTERES);
@@ -88,7 +88,7 @@ int main(void)
 			else {printf("%s venceu!!\n\n", nome2);}
 		}
 
-        else if(opcao == 'k')
+        else if(opcao == 'q')
 		{
 			printf("\n\nVolte sempre!! Tenha um bom dia!!\n\n");
 			break;
