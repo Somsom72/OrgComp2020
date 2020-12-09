@@ -29,12 +29,11 @@ void imprimeSaida(int* placar, char *nome1, char *nome2){
 
     printf("\r%s", nome1);
 
-    if(placar<0){
-		printf("kk");
-        for(i=DURACAO_DO_JOGO + (*placar);i>0;i--) printf(" ");
+    if(*placar<0){
+        for(i=(DURACAO_DO_JOGO) + (*placar);i>0;i--) printf(" ");
         printf("|"); for(i=0;i<TAMANHO_DA_CORDA;i++) printf("-"); printf("|");
         for(i=0;i<DURACAO_DO_JOGO;i++) printf(" ");
-        //for(i=0;i<abs(*placar);i++) printf(" ");
+        for(i=0;i<abs(*placar);i++) printf(" ");
     } 
 
     else{
@@ -44,7 +43,10 @@ void imprimeSaida(int* placar, char *nome1, char *nome2){
         for(i=(int)*placar;i<DURACAO_DO_JOGO;i++) printf(" ");
     } 
 
-    printf("%s\r\n", nome2);
+	printf("%s", nome2);
+	for(i = strlen(nome1)-strlen(nome2); i >= 0; i--) printf("\b");
+	
+    printf("\r\n");
 
     if(*placar==0) printf("PlacarAtual: 0. Está tudo empatado!\n\n");
     else if(*placar<0) printf("PlacarAtual: %d de vantagem para %s\n\n",-(*placar), nome1);
