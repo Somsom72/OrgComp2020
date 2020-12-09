@@ -22,7 +22,7 @@ void imprimeSaida(int* placar, char *nome1, char *nome2){
 
     system ("clear");
 
-    printf("O cabo de guerras está valendo!\nPressione 's' para puxar o cabo para a esquerda ou 'k' para puxá-lo para a direita\n");
+    printf("O cabo-de-guerra está valendo!\n\nPressione 's' para puxar o cabo para a esquerda ou 'k' para puxá-lo para a direita\n\n\n");
 
     printf("\rs");
 

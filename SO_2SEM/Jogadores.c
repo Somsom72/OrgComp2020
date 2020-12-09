@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <string.h>
+#include <math.h>
 #include "Jogadores.h"
 
 Jogador inicializarJogador(char* nome, int* ptr_buffer)
@@ -24,17 +25,20 @@ Infos inicializarInfos(Jogador j1, Jogador j2, int* ptr_placar, int* ptr_quemVen
 
 int atualizaPlacar(int *placar, int *j, float fator_inercia, int dir)
 {
-	//printf("Entrando atualiza placar\n");
     if(placar == NULL || j == NULL) {return 1;}
 
     /* move placar e esvazia buffer do jogador */
     (*placar) += (*j) * (dir);
 	(*j) = 0;
 
-    /* inércia */
-    //*placar += (*placar) * fator_inercia;
+    /* inércia (em que o fator de inércia decide a frequência em que a vantagem da inércia é concedida) */
+    int i;
+    for(i = 1; i < FATOR_INERCIA; i++)
+    {
+        if((dir == -1) && (*placar == -i * floor((double)(DURACAO_DO_JOGO / FATOR_INERCIA)))) {(*placar)--;}
+        else if((dir == 1) && (*placar == i * floor((double)(DURACAO_DO_JOGO / FATOR_INERCIA)))) {(*placar)++;}
+    }
 
-	//printf("Saindo atualiza placar\n");
     return 0;
 }
 

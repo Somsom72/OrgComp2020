@@ -15,8 +15,7 @@
  */
 void mostrarMenu(){
 	printf("\n\n=========== Boas-vindas ao Cabo de Guerra ===========\n");
-	printf("\nSelecione uma das opções abaixo:");
-    printf("\n\nJogar(Play): 'p'\nSair(quit): 'q'\n\n");
+	printf("\nSelecione 'p' para jogar!\n\n");
 	
 	return;
 }
@@ -86,10 +85,7 @@ int main(void)
 			printf("\n\nO jogo demorou %.1lf segundos e ", (double)(fim-inicio)/CLOCKS_PER_SEC);
 			if(quemVenceu == 1) {printf("%s venceu!!\n\n", nome1);}
 			else {printf("%s venceu!!\n\n", nome2);}
-		}
 
-        else if(opcao == 'q')
-		{
 			printf("\n\nVolte sempre!! Tenha um bom dia!!\n\n");
 			break;
 		}

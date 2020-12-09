@@ -15,13 +15,11 @@ void *producer(void *prod_info)
     Infos* info = (Infos*) prod_info;
 
     while(*(info -> ptr_quemVenceu) == 0){
-		//printf("acessando produtor\n");
         sem_wait(&empty); //down empty
         pthread_mutex_lock(&mutex); //down mutex
         enter_item(info -> ptr_placar, info -> jogador2.ptr_buffer); //using critical region
         pthread_mutex_unlock(&mutex); //up mutex
         sem_post(&full); //up full
-		//printf("saindo produtor\n");
     }
 	return NULL;
 }
@@ -31,13 +29,11 @@ void *consumer(void *cons_info)
     Infos* info = (Infos*) cons_info;
 
     while(*(info -> ptr_quemVenceu) == 0){
-		//printf("acessando consumidor\n");
         sem_wait(&full); //down full
         pthread_mutex_lock(&mutex); //down mutex
         remove_item(info -> ptr_placar, info -> jogador1.ptr_buffer); //using critical region
         pthread_mutex_unlock(&mutex); //up mutex
         sem_post(&empty); //up empty
-		//printf("saindo consumidor\n");
     }
 	return NULL;
 }
