@@ -10,6 +10,13 @@
 #include "Jogadores.h"
 #include "defines.h"
 
+#ifdef __unix__
+	#include <unistd.h>
+	#define _sleep(x) sleep(x)
+#elif _WIND32 || _WIN64
+	#include <windows.h>
+	#define _sleep(x) Sleep(x*1000)
+#endif
 /**
  * \brief Menu de abertura do jogo com as opções de jogar 's' e sair 'k'.
  */
@@ -41,8 +48,6 @@ int iniciarJogo(char *nome1, char *nome2)
 	criarThreads(&t, &inf);
 
 	liberarThreads(&t);
-
-	//mataThread(&t);
 
     return quemVenceu;
 }
@@ -77,6 +82,12 @@ int main(void)
 			
 			printf("Jogador 2: ");
 			scanf("%[^\n]%*c", nome2);
+
+			for(int i = 5; i >= 0; i--){
+				printf("Começando em %d \r", i);
+				fflush(stdout);
+				//_sleep(1);
+			}
 
 			inicio = clock();
 			quemVenceu = iniciarJogo(nome1, nome2);
