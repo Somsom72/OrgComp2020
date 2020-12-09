@@ -2,5 +2,5 @@ run:
 	./exec && stty sane
 
 all:
-	gcc -o exec Jogadores.c EntradaSaida.c Semaforo.c Threads.c CaboDeGuerra.c -lm -lpthread -lrt
+	gcc -g -o exec Jogadores.c EntradaSaida.c Semaforo.c Threads.c caboDeGuerra.c -lm -lpthread -lrt
 	

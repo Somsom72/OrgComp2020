@@ -6,6 +6,7 @@
 Jogador inicializarJogador(char* nome, int* ptr_buffer)
 {
     Jogador j;
+	memset(j.nome, '\0', MAX_CARACTERES);
     strncpy(j.nome, nome, strlen(nome));
     j.ptr_buffer = ptr_buffer;
 
