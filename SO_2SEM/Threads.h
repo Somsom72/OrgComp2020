@@ -11,6 +11,9 @@
 #include "EntradaSaida.h"
 #include "Semaforo.h"
 
+/** 
+ * \brief Struct que representa todas as threads ativas na execução.  
+ */
 typedef struct {
     pthread_t entrada, saida;
 	pthread_t verificadorVitoria;

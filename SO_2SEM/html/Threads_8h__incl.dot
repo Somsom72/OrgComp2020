@@ -1,0 +1,22 @@
+digraph "Threads.h"
+{
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  Node0 [label="Threads.h",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black"];
+  Node0 -> Node1 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node1 [label="pthread.h",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled"];
+  Node0 -> Node2 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="Jogadores.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$Jogadores_8h.html",tooltip="Conteúdo relacionado às threads dos jogadores. "];
+  Node2 -> Node3 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="defines.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$defines_8h.html",tooltip="Guarda todos defines do projeto. "];
+  Node0 -> Node4 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node4 [label="EntradaSaida.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$EntradaSaida_8h.html",tooltip="Conteúdo relacionado a captar entradas e formatar saídas. "];
+  Node4 -> Node5 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node5 [label="stdio.h",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled"];
+  Node4 -> Node6 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node6 [label="stdlib.h",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled"];
+  Node4 -> Node7 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node7 [label="string.h",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled"];
+  Node0 -> Node8 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node8 [label="Semaforo.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$Semaforo_8h.html",tooltip="Conteúdo relacionado ao semáforo. "];
+}
