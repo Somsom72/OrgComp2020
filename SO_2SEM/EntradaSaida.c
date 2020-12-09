@@ -25,7 +25,7 @@ void imprimeSaida(int* placar, char *nome1, char *nome2){
 
     system ("clear");
 
-    printf("\n\t\t============O cabo-de-guerra está valendo!============\n\n");
+    printf("\n\t\t============ O cabo-de-guerra está valendo! ============\n\n");
 	printf("\rPressione 's' para puxar o cabo para a esquerda ou 'k' para puxá-lo para a direita\n\n\n\n");
 
     printf("\r%s", nome1);
