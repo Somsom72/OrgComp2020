@@ -28,12 +28,12 @@ int atualizaPlacar(int *placar, int *j, float fator_inercia, int dir)
     if(placar == NULL || j == NULL) {return 1;}
 
     /* inércia (em que o fator de inércia decide a frequência em que a vantagem da inércia é concedida) */
-    int i;/*
-    for(i = 1; i < FATOR_INERCIA; i++)
+    int i;
+    for(i = 1; i < fator_inercia; i++)
     {
-        if((dir == -1) && (*placar == -i * floor((double)(DURACAO_DO_JOGO / FATOR_INERCIA)))) {(*placar)--;}
-        else if((dir == 1) && (*placar == i * floor((double)(DURACAO_DO_JOGO / FATOR_INERCIA)))) {(*placar)++;}
-    }*/
+        if((dir == -1) && (*placar == -i * floor((double)(DURACAO_DO_JOGO / fator_inercia))) && (*j > 0)) {(*placar)--;}
+        else if((dir == 1) && (*placar == i * floor((double)(DURACAO_DO_JOGO / fator_inercia))) && (*j > 0)) {(*placar)++;}
+    }
 
     /* move placar e esvazia buffer do jogador */
     (*placar) += (*j) * (dir);

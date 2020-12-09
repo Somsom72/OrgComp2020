@@ -82,7 +82,6 @@ int main(void)
 			
 			printf("Jogador 2: ");
 			scanf("%[^\n]%*c", nome2);
-
 			for(int i = 5; i >= 0; i--){
 				printf("Começando em %d \r", i);
 				fflush(stdout);
