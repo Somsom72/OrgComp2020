@@ -9,14 +9,10 @@
 #include "Threads.h"
 #include "Jogadores.h"
 #include "defines.h"
+#include <unistd.h>
 
-#ifdef __unix__
-	#include <unistd.h>
-	#define _sleep(x) sleep(x)
-#elif _WIND32 || _WIN64
-	#include <windows.h>
-	#define _sleep(x) Sleep(x*1000)
-#endif
+#define _sleep(x) sleep(x)
+
 /**
  * \brief Menu de abertura do jogo com as opções de jogar 's' e sair 'k'.
  */
