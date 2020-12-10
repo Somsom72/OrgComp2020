@@ -81,7 +81,7 @@ int main(void)
 			for(int i = 5; i >= 0; i--){
 				printf("Começando em %d \r", i);
 				fflush(stdout);
-				//_sleep(1);
+				_sleep(1);
 			}
 
 			inicio = clock();
