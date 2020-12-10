@@ -64,9 +64,8 @@ $(function() {
 <div class="contents">
 <div class="toc"><h3>Table of Contents</h3>
 <ul><li class="level1"><a href="#sec1">Breve Descrição do Projeto</a></li>
-<li class="level1"><a href="#sec2">Manual de Instalação</a></li>
-<li class="level1"><a href="#sec3">Como Jogar</a></li>
-<li class="level1"><a href="#sec4">Nota Técnica</a></li>
+<li class="level1"><a href="#sec2">Nota Técnica</a></li>
+<li class="level1"><a href="#sec3">Mais Informações</a></li>
 </ul>
 </div>
 <div class="textblock"><dl class="section author"><dt>Author</dt><dd>Luca Maciel Alexander, 11219175 </dd>
@@ -82,14 +81,13 @@ Dalton Hiroshi Sato, 11275172 </dd></dl>
 Breve Descrição do Projeto</h1>
 <p>Jogo simples multiplayer com mecânica fundada em frequência de apertos de teclas, criado para a disciplina de Sistemas Operacionais SSC0140, demonstrando o uso de threads e semáforos.</p>
 <h1><a class="anchor" id="sec2"></a>
-Manual de Instalação</h1>
-<h1><a class="anchor" id="sec3"></a>
-Como Jogar</h1>
-<h1><a class="anchor" id="sec4"></a>
 Nota Técnica</h1>
 <p>Jogo de "cabo-de-guerra" virtual. Existem dois jogadores, a cada um é associado um botão do teclado. A partir do sinal de início, ambos devem apertar suas respectivas teclas o mais frequentemente (rapidamente) possível, objetivando "puxar a corda" para seu lado. O deslocamento da corda será constantemente atualizado e impresso em tempo real. Será também implementada a característica de "inércia", implicando que se um jogador estiver ganhando, fica mais fácil de puxar a corda para seu lado. <br />
 Cada jogador será abstraído como uma thread. Estas tentam constantemente acessar e modificar uma variável que deverá conter o estado da corda (logo, sendo a região crítica). Um semáforo será utilizado para controlar esses acessos. <br />
-A inércia da corda justifica o sentido do uso do semáforo, pois a quantidade que uma thread altera o estado da corda depende do próprio estado da corda! Assim, é impossível salvar o deslocamento causado por cada jogador em variáveis separadas, somando as quando for conveniente. As alterações de deslocamento terão de ser atualizadas imediatamente e diretamente na variável que contém o estado da corda, pedindo a atuação de um semáforo sobre essa região crítica. </p>
+A inércia da corda justifica o sentido do uso do semáforo, pois a quantidade que uma thread altera o estado da corda depende do próprio estado da corda! Assim, é impossível salvar o deslocamento causado por cada jogador em variáveis separadas, somando as quando for conveniente. As alterações de deslocamento terão de ser atualizadas imediatamente e diretamente na variável que contém o estado da corda, pedindo a atuação de um semáforo sobre essa região crítica.</p>
+<h1><a class="anchor" id="sec3"></a>
+Mais Informações</h1>
+<p>Mais informações contidas no manual que acompanha o jogo. Divirta-se! </p>
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

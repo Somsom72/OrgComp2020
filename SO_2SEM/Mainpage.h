@@ -15,16 +15,7 @@
  *  Jogo simples multiplayer com mecânica fundada em frequência de apertos de teclas, 
  *  criado para a disciplina de Sistemas Operacionais SSC0140, demonstrando o uso de threads e semáforos.
  * 
- * 
- * \section sec2 Manual de Instalação
- * 
- * 
- * 
- * \section sec3 Como Jogar
- * 
- * 
- * 
- * \section sec4 Nota Técnica
+ * \section sec2 Nota Técnica
  * 
  * Jogo de "cabo-de-guerra" virtual. Existem dois jogadores, a cada um é associado um botão do teclado. A partir 
  * do sinal de início, ambos devem apertar suas respectivas teclas o mais frequentemente (rapidamente) possível, 
@@ -37,5 +28,9 @@
  * estado da corda! Assim, é impossível salvar o deslocamento causado por cada jogador em variáveis separadas, somando as quando 
  * for conveniente. As alterações de deslocamento terão de ser atualizadas imediatamente e diretamente na variável que contém o 
  * estado da corda, pedindo a atuação de um semáforo sobre essa região crítica. 
+ * 
+ * \section sec3 Mais Informações 
+ * 
+ * Mais informações contidas no manual que acompanha o jogo. Divirta-se!
  * 
 */
